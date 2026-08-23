@@ -190,28 +190,30 @@ Share: Job Detail → copy public link (no login)
 
 ### Tasks
 
-- [ ] **P5-01** `M` Wizard UI: steps Bio → Education → Experience → Resume & Submit; step indicator
-- [ ] **P5-02** `M` Block wizard until authenticated (AC 11.2); never show form to anonymous
-- [ ] **P5-03** `S` `POST /api/v1/jobs/{id}/applications/draft` — save & continue; restore on refresh (FR-APP-06)
-- [ ] **P5-04** `M` `POST /api/v1/jobs/{id}/applications` multipart: resume + cover note + consents
-- [ ] **P5-05** `M` Resume required: PDF/DOC/DOCX, ≤ 5 MB; reject submit without file (AC 11.3)
-- [ ] **P5-06** `M` Both consents required; Submit disabled in UI until resume + consents
-- [ ] **P5-07** `S` Optional cover note (~500 words)
-- [ ] **P5-08** `M` Generate `application_code` (`APP-#####`); set `status=new`, `submitted_at`
-- [ ] **P5-09** `M` Freeze `snapshot_json` (bio + education + experience + years) at submit
-- [ ] **P5-10** `M` Reject submit if requisition is not `published`
-- [ ] **P5-11** `S` Duplicate submit → `409 CONFLICT` (FR-APP-10); UI message + link to My Applications
-- [ ] **P5-12** `M` Confirmation page: application ID, submitted at, status “Received — Under Review”
-- [ ] **P5-13** `S` My Applications list + status (FR-APP-11)
-- [ ] **P5-14** `M` Authenticated file GET for the candidate’s own resume
+- [x] **P5-01** `M` Wizard UI: steps Bio → Education → Experience → Resume & Submit; step indicator
+- [x] **P5-02** `M` Block wizard until authenticated (AC 11.2); never show form to anonymous
+- [x] **P5-03** `S` `POST /api/v1/jobs/{id}/applications/draft` — save & continue; restore on refresh (FR-APP-06)
+- [x] **P5-04** `M` `POST /api/v1/jobs/{id}/applications` multipart: resume + cover note + consents
+- [x] **P5-05** `M` Resume required: PDF/DOC/DOCX, ≤ 5 MB; reject submit without file (AC 11.3)
+- [x] **P5-06** `M` Both consents required; Submit disabled in UI until resume + consents
+- [x] **P5-07** `S` Optional cover note (~500 words)
+- [x] **P5-08** `M` Generate `application_code` (`APP-#####`); set `status=new`, `submitted_at`
+- [x] **P5-09** `M` Freeze `snapshot_json` (bio + education + experience + years) at submit
+- [x] **P5-10** `M` Reject submit if requisition is not `published`
+- [x] **P5-11** `S` Duplicate submit → `409 CONFLICT` (FR-APP-10); UI message + link to My Applications
+- [x] **P5-12** `M` Confirmation page: application ID, submitted at, status “Received — Under Review”
+- [x] **P5-13** `S` My Applications list + status (FR-APP-11)
+- [x] **P5-14** `M` Authenticated file GET for the candidate’s own resume
 
 ### Exit criteria
 
-- [ ] Anonymous Apply never shows the form (AC 11.2)
-- [ ] Submit without resume is blocked (AC 11.3)
-- [ ] Valid submit creates one application linked to job + candidate
-- [ ] Confirmation shows human Application ID
-- [ ] Second submit to the same open job is blocked (if P5-11 done)
+- [x] Anonymous Apply never shows the form (AC 11.2)
+- [x] Submit without resume is blocked (AC 11.3)
+- [x] Valid submit creates one application linked to job + candidate
+- [x] Confirmation shows human Application ID
+- [x] Second submit to the same open job is blocked (if P5-11 done)
+
+> **Phase 5 Status:** Completed. Implemented candidate Apply Wizard with step indicators and draft persistence (`/apply/[requisitionId]`), mandatory resume file upload and binary validation (PDF/DOC/DOCX ≤ 5 MB), mandatory accuracy & privacy consents, unique human Application ID generation (`APP-#####`), frozen profile snapshot creation, duplicate application detection (`409 CONFLICT`), Confirmation Screen (`/applications/[id]/confirmation`), "My Applications" dashboard (`/applications`), and secure IDOR-protected resume streaming (`/api/v1/files/resumes/{id}`). All 39 tests pass; Next.js build succeeds with 0 errors.
 
 ---
 
