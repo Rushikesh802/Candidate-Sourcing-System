@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.database import SessionLocal
-from app.routers import health, auth, admin_requisitions, public_jobs
+from app.routers import health, auth, admin_requisitions, public_jobs, profile, files
 from app.services.bootstrap import init_db
 
 logger = logging.getLogger(__name__)
@@ -59,6 +59,9 @@ app.include_router(health.router, prefix=settings.API_V1_STR)
 app.include_router(auth.router, prefix=settings.API_V1_STR)
 app.include_router(admin_requisitions.router, prefix=settings.API_V1_STR)
 app.include_router(public_jobs.router, prefix=settings.API_V1_STR)
+app.include_router(profile.router, prefix=settings.API_V1_STR)
+app.include_router(files.router, prefix=settings.API_V1_STR)
+
 
 
 @app.get("/", tags=["Root"])

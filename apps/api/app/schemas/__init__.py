@@ -19,6 +19,17 @@ from app.schemas.requisition import (
     RequisitionFilter,
 )
 
+from app.schemas.profile import (
+    ProfileUpdate,
+    ProfileResponse,
+    EducationItem,
+    EducationListUpdate,
+    EducationListResponse,
+    ExperienceItem,
+    ExperienceListUpdate,
+    ExperienceListResponse,
+)
+
 __all__ = [
     "UserBase",
     "UserCreate",
@@ -39,4 +50,13 @@ __all__ = [
     "PublicJobListItem",
     "PublicJobDetail",
     "RequisitionFilter",
+    "ProfileUpdate",
+    "ProfileResponse",
+    "EducationItem",
+    "EducationListUpdate",
+    "EducationListResponse",
+    "ExperienceItem",
+    "ExperienceListUpdate",
+    "ExperienceListResponse",
 ]
+

@@ -163,19 +163,21 @@ Share: Job Detail → copy public link (no login)
 
 ### Tasks
 
-- [ ] **P4-01** `M` `GET/PUT /api/v1/me/profile` — bio-data fields and validation (§9.1)
-- [ ] **P4-02** `M` `GET/PUT /api/v1/me/education` — replace list; ≥ 1 row when completing apply
-- [ ] **P4-03** `M` `GET/PUT /api/v1/me/experience` — list **or** `is_fresher: true`
-- [ ] **P4-04** `M` Derive `total_experience_years` from date ranges; 0 if fresher
-- [ ] **P4-05** `S` Optional profile photo (JPG/PNG, 2 MB) via storage adapter
-- [ ] **P4-06** `M` Field validation: name max 50, email unique, mobile with country code, year of passing not in the future, end date hidden when “currently working”
-- [ ] **P4-07** `S` `/profile` page (same fields as wizard, reusable)
+- [x] **P4-01** `M` `GET/PUT /api/v1/me/profile` — bio-data fields and validation (§9.1)
+- [x] **P4-02** `M` `GET/PUT /api/v1/me/education` — replace list; ≥ 1 row when completing apply
+- [x] **P4-03** `M` `GET/PUT /api/v1/me/experience` — list **or** `is_fresher: true`
+- [x] **P4-04** `M` Derive `total_experience_years` from date ranges; 0 if fresher
+- [x] **P4-05** `S` Optional profile photo (JPG/PNG, 2 MB) via storage adapter
+- [x] **P4-06** `M` Field validation: name max 50, email unique, mobile with country code, year of passing not in the future, end date hidden when “currently working”
+- [x] **P4-07** `S` `/profile` page (same fields as wizard, reusable)
 
 ### Exit criteria
 
-- [ ] Profile persists and is reused on the next apply (FR-AUTH-07)
-- [ ] Fresher path does not require employer fields
-- [ ] Invalid years / missing mandatory fields return `VALIDATION_ERROR`
+- [x] Profile persists and is reused on the next apply (FR-AUTH-07)
+- [x] Fresher path does not require employer fields
+- [x] Invalid years / missing mandatory fields return `VALIDATION_ERROR`
+
+> **Phase 4 Status:** Completed. Implemented candidate bio-data, education, and experience APIs (`/api/v1/me/*`), automatic non-overlapping date calculation for `total_experience_years`, fresher support, profile photo upload & streaming (`/api/v1/files/photos/*`), input validation, and the Next.js Candidate Profile dashboard (`/profile`). All 34 tests pass; Next.js production build succeeds with 0 errors.
 
 ---
 
