@@ -1,0 +1,4 @@
+# Disallow admin paths from search engines
+User-agent: *
+Disallow: /admin/
+Disallow: /api/

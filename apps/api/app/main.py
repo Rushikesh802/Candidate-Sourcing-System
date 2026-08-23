@@ -1,0 +1,67 @@
+import logging
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.core.config import settings
+from app.core.database import SessionLocal, engine, Base
+from app.routers import health
+from app.services.bootstrap import init_db
+
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Run bootstrap / seed if DB is available
+    try:
+        db = SessionLocal()
+        try:
+            init_db(db)
+            logger.info("Database bootstrap and seed completed successfully.")
+        finally:
+            db.close()
+    except Exception as e:
+        logger.warning(f"Database bootstrap skipped on startup: {e}")
+    yield
+    # Shutdown logic if needed
+
+
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    lifespan=lifespan,
+)
+
+# CORS Middleware configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        settings.PUBLIC_BASE_URL,
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Direct root /health endpoint for Docker healthcheck and root monitoring
+@app.get("/health", tags=["Health"])
+def root_health():
+    return {"status": "ok"}
+
+# API v1 routers
+app.include_router(health.router, prefix=settings.API_V1_STR)
+
+
+@app.get("/", tags=["Root"])
+def root():
+    return {
+        "name": settings.PROJECT_NAME,
+        "version": settings.VERSION,
+        "docs": "/docs",
+        "health": "/health",
+    }
