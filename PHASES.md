@@ -226,20 +226,22 @@ Share: Job Detail → copy public link (no login)
 
 ### Tasks
 
-- [ ] **P6-01** `M` Mailer adapter: console + SMTP (Mailhog locally)
-- [ ] **P6-02** `M` On submit: insert `notifications` row for **every admin**
-- [ ] **P6-03** `M` Email candidate: application ID, job title, timestamp
-- [ ] **P6-04** `M` Email admin: requisition code + candidate name
-- [ ] **P6-05** `M` Email failure does **not** roll back the application
-- [ ] **P6-06** `S` `GET /api/v1/admin/notifications` + mark read
-- [ ] **P6-07** `S` Admin bell with unread count (FR-NOTIF-04)
-- [ ] **P6-08** `C` Candidate email on status change (FR-NOTIF-03) — schema-ready only unless extra time
+- [x] **P6-01** `M` Mailer adapter: console + SMTP (Mailhog locally)
+- [x] **P6-02** `M` On submit: insert `notifications` row for **every admin**
+- [x] **P6-03** `M` Email candidate: application ID, job title, timestamp
+- [x] **P6-04** `M` Email admin: requisition code + candidate name
+- [x] **P6-05** `M` Email failure does **not** roll back the application
+- [x] **P6-06** `S` `GET /api/v1/admin/notifications` + mark read
+- [x] **P6-07** `S` Admin bell with unread count (FR-NOTIF-04)
+- [x] **P6-08** `C` Candidate email on status change (FR-NOTIF-03) — schema-ready only unless extra time
 
 ### Exit criteria
 
-- [ ] Successful submit always creates the application even if SMTP is down
-- [ ] With Mailhog up, both emails appear (AC 11.4)
-- [ ] Admin sees an in-app notification referencing job + candidate
+- [x] Successful submit always creates the application even if SMTP is down
+- [x] With Mailhog up, both emails appear (AC 11.4)
+- [x] Admin sees an in-app notification referencing job + candidate
+
+> **Phase 6 Status:** Completed. Implemented SMTP + console logging mailer adapter (`apps/api/app/services/mailer.py`), automatic in-app notification creation for all administrators upon candidate submission, non-blocking candidate confirmation & admin alert email dispatching, admin notification API endpoints (`/api/v1/admin/notifications`, mark read), Next.js Admin Notification Bell in Header with live polling & unread counter badge, and full notifications management screen (`/admin/notifications`). All 43 backend tests pass; Next.js production build succeeds with 0 errors.
 
 ---
 

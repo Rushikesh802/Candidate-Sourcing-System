@@ -3,7 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+
 import { Briefcase, LogOut, User as UserIcon, Shield } from 'lucide-react';
+import { NotificationBell } from '@/components/admin/NotificationBell';
 
 export function Header() {
   const { user, logout, isLoading } = useAuth();
@@ -48,6 +50,8 @@ export function Header() {
             <div className="h-8 w-24 bg-slate-100 animate-pulse rounded-md"></div>
           ) : user ? (
             <div className="flex items-center gap-3">
+              {user.role === 'admin' && <NotificationBell />}
+
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs text-slate-700">
                 <UserIcon className="h-3.5 w-3.5 text-slate-500" />
                 <span className="font-medium">{user.first_name} {user.last_name}</span>
@@ -55,6 +59,7 @@ export function Header() {
                   {user.role}
                 </span>
               </div>
+
               <button
                 onClick={() => logout()}
                 className="inline-flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-red-600 transition px-2.5 py-1.5 rounded-md hover:bg-slate-100"

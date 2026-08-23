@@ -12,7 +12,9 @@ from app.routers import (
     profile,
     files,
     candidate_applications,
+    admin_notifications,
 )
+
 from app.services.bootstrap import init_db
 
 logger = logging.getLogger(__name__)
@@ -70,6 +72,8 @@ app.include_router(public_jobs.router, prefix=settings.API_V1_STR)
 app.include_router(profile.router, prefix=settings.API_V1_STR)
 app.include_router(files.router, prefix=settings.API_V1_STR)
 app.include_router(candidate_applications.router, prefix=settings.API_V1_STR)
+app.include_router(admin_notifications.router, prefix=settings.API_V1_STR)
+
 
 
 

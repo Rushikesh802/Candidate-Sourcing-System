@@ -362,7 +362,51 @@ def submit_application(
     db.commit()
     db.refresh(application)
 
+
+    # 9. In-App Notifications (for every admin)
+    try:
+        from app.services.notification import notify_all_admins_new_application
+        notify_all_admins_new_application(
+            db=db,
+            application=application,
+            requisition=req,
+            candidate=user,
+        )
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"In-app notification failed: {e}")
+
+    # 10. Email Notifications (Candidate confirmation + Admin alert)
+    try:
+        from app.services.mailer import (
+            send_candidate_application_email,
+            send_admin_new_application_email,
+        )
+        send_candidate_application_email(
+            to_email=user.email,
+            candidate_name=f"{user.first_name} {user.last_name}",
+            job_title=req.title,
+            requisition_code=req.requisition_code,
+            application_code=application.application_code,
+            submitted_at=application.submitted_at or datetime.now(timezone.utc),
+        )
+
+        admins = db.query(User).filter(User.role == UserRole.ADMIN).all()
+        for admin in admins:
+            send_admin_new_application_email(
+                admin_email=admin.email,
+                requisition_code=req.requisition_code,
+                job_title=req.title,
+                candidate_name=f"{user.first_name} {user.last_name}",
+                candidate_email=user.email,
+                application_code=application.application_code,
+            )
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Email dispatch failed: {e}")
+
     return application
+
 
 
 def get_candidate_applications(db: Session, user: User) -> List[Application]:
