@@ -3,8 +3,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.core.database import SessionLocal, engine, Base
-from app.routers import health
+from app.core.database import SessionLocal
+from app.routers import health, auth
 from app.services.bootstrap import init_db
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,6 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Database bootstrap skipped on startup: {e}")
     yield
-    # Shutdown logic if needed
 
 
 app = FastAPI(
@@ -55,6 +54,7 @@ def root_health():
 
 # API v1 routers
 app.include_router(health.router, prefix=settings.API_V1_STR)
+app.include_router(auth.router, prefix=settings.API_V1_STR)
 
 
 @app.get("/", tags=["Root"])

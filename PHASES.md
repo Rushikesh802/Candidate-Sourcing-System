@@ -89,26 +89,28 @@ Share: Job Detail → copy public link (no login)
 
 ### Tasks
 
-- [ ] **P2-01** `M` Password hashing (Argon2id or bcrypt)
-- [ ] **P2-02** `M` `POST /api/v1/auth/register` — first name, last name, email, mobile, password; role always `candidate`
-- [ ] **P2-03** `M` `POST /api/v1/auth/login` — email + password; set HttpOnly access + refresh cookies
-- [ ] **P2-04** `M` `POST /api/v1/auth/logout` — clear cookies
-- [ ] **P2-05** `M` `GET /api/v1/auth/me`
-- [ ] **P2-06** `M` FastAPI deps: `get_current_user`, `require_role("candidate")`, `require_role("admin")`
-- [ ] **P2-07** `M` Next.js pages: `/login`, `/register`; `next` query preserved (return-to-job)
-- [ ] **P2-08** `M` Next.js middleware: `/admin/*` admin-only; `/apply/*`, `/applications`, `/profile` candidate-only
-- [ ] **P2-09** `M` `POST /api/v1/auth/forgot-password` — always 202; email if user exists
-- [ ] **P2-10** `M` `POST /api/v1/auth/reset-password` + `/forgot-password` and `/reset-password` pages
-- [ ] **P2-11** `S` Rate limit login and forgot-password
-- [ ] **P2-12** `C` Google / LinkedIn buttons as **disabled UI only** — do not implement OAuth
+- [x] **P2-01** `M` Password hashing (Argon2id or bcrypt)
+- [x] **P2-02** `M` `POST /api/v1/auth/register` — first name, last name, email, mobile, password; role always `candidate`
+- [x] **P2-03** `M` `POST /api/v1/auth/login` — email + password; set HttpOnly access + refresh cookies
+- [x] **P2-04** `M` `POST /api/v1/auth/logout` — clear cookies
+- [x] **P2-05** `M` `GET /api/v1/auth/me`
+- [x] **P2-06** `M` FastAPI deps: `get_current_user`, `require_role("candidate")`, `require_role("admin")`
+- [x] **P2-07** `M` Next.js pages: `/login`, `/register`; `next` query preserved (return-to-job)
+- [x] **P2-08** `M` Next.js middleware: `/admin/*` admin-only; `/apply/*`, `/applications`, `/profile` candidate-only
+- [x] **P2-09** `M` `POST /api/v1/auth/forgot-password` — always 202; email if user exists
+- [x] **P2-10** `M` `POST /api/v1/auth/reset-password` + `/forgot-password` and `/reset-password` pages
+- [x] **P2-11** `S` Rate limit login and forgot-password
+- [x] **P2-12** `C` Google / LinkedIn buttons as **disabled UI only** — do not implement OAuth
 
 ### Exit criteria
 
-- [ ] Candidate can register and stay logged in across refresh
-- [ ] Admin seed can log in; candidate cannot open `/admin`
-- [ ] Unauthenticated user hitting Apply is sent to login with `next=/apply/{id}`
-- [ ] After login, they land on that apply URL (FR-AUTH-06)
-- [ ] Forgot-password does not reveal whether the email exists
+- [x] Candidate can register and stay logged in across refresh
+- [x] Admin seed can log in; candidate cannot open `/admin`
+- [x] Unauthenticated user hitting Apply is sent to login with `next=/apply/{id}`
+- [x] After login, they land on that apply URL (FR-AUTH-06)
+- [x] Forgot-password does not reveal whether the email exists
+
+> **Phase 2 Status:** Completed. Implemented JWT auth with HttpOnly cookies, Argon2id hashing, FastAPI auth endpoints & dependencies, React AuthContext, Next.js login/register/forgot-password/reset-password pages with `next` return-to-job support, disabled OAuth buttons, and role-based Next.js route protection middleware. All 20 tests pass.
 
 ---
 
