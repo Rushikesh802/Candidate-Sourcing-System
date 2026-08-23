@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.core.database import SessionLocal
-from app.routers import health, auth
+from app.routers import health, auth, admin_requisitions, public_jobs
 from app.services.bootstrap import init_db
 
 logger = logging.getLogger(__name__)
@@ -47,14 +47,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Direct root /health endpoint for Docker healthcheck and root monitoring
 @app.get("/health", tags=["Health"])
 def root_health():
     return {"status": "ok"}
 
+
 # API v1 routers
 app.include_router(health.router, prefix=settings.API_V1_STR)
 app.include_router(auth.router, prefix=settings.API_V1_STR)
+app.include_router(admin_requisitions.router, prefix=settings.API_V1_STR)
+app.include_router(public_jobs.router, prefix=settings.API_V1_STR)
 
 
 @app.get("/", tags=["Root"])

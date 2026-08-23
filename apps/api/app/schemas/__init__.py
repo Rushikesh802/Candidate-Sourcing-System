@@ -8,6 +8,16 @@ from app.schemas.auth import (
     MessageResponse,
 )
 from app.schemas.errors import ErrorDetail, ErrorResponse
+from app.schemas.requisition import (
+    RequisitionBase,
+    RequisitionCreate,
+    RequisitionUpdate,
+    RequisitionResponse,
+    RequisitionAdminResponse,
+    PublicJobListItem,
+    PublicJobDetail,
+    RequisitionFilter,
+)
 
 __all__ = [
     "UserBase",
@@ -21,4 +31,12 @@ __all__ = [
     "MessageResponse",
     "ErrorDetail",
     "ErrorResponse",
+    "RequisitionBase",
+    "RequisitionCreate",
+    "RequisitionUpdate",
+    "RequisitionResponse",
+    "RequisitionAdminResponse",
+    "PublicJobListItem",
+    "PublicJobDetail",
+    "RequisitionFilter",
 ]

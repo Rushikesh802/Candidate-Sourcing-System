@@ -123,32 +123,34 @@ Share: Job Detail → copy public link (no login)
 
 ### Admin tasks
 
-- [ ] **P3-01** `M` `POST/GET /api/v1/admin/requisitions` — create + list (status, application count)
-- [ ] **P3-02** `M` `GET/PATCH /api/v1/admin/requisitions/{id}` — get + edit (draft and published)
-- [ ] **P3-03** `M` `POST .../publish` and `POST .../close`
-- [ ] **P3-04** `M` Auto `requisition_code` (`REQ-YYYY-NNNNN`) and public `slug`
-- [ ] **P3-05** `M` Fields: title, department, location (incl. Remote), employment type, experience range, openings, hiring manager, description, **max salary budget**, **hiring complete by**
-- [ ] **P3-06** `M` Admin UI: list, create, edit, Save as Draft, Publish, Close
-- [ ] **P3-07** `S` Sanitize description HTML on save
+- [x] **P3-01** `M` `POST/GET /api/v1/admin/requisitions` — create + list (status, application count)
+- [x] **P3-02** `M` `GET/PATCH /api/v1/admin/requisitions/{id}` — get + edit (draft and published)
+- [x] **P3-03** `M` `POST .../publish` and `POST .../close`
+- [x] **P3-04** `M` Auto `requisition_code` (`REQ-YYYY-NNNNN`) and public `slug`
+- [x] **P3-05** `M` Fields: title, department, location (incl. Remote), employment type, experience range, openings, hiring manager, description, **max salary budget**, **hiring complete by**
+- [x] **P3-06** `M` Admin UI: list, create, edit, Save as Draft, Publish, Close
+- [x] **P3-07** `S` Sanitize description HTML on save
 
 ### Public tasks
 
-- [ ] **P3-08** `M` `GET /api/v1/jobs` — **published only**
-- [ ] **P3-09** `M` `GET /api/v1/jobs/{slug}` — 404 if draft/closed
-- [ ] **P3-10** `M` `/jobs` listing cards: title, department, location, type, experience, posted date, Apply, Share
-- [ ] **P3-11** `M` `/jobs/[slug]` detail: description, overview rail, Apply, Share
-- [ ] **P3-12** `M` Share: copy canonical public URL (Web Share API if available); no login
-- [ ] **P3-13** `S` Search `q` + filters: department, location, experience (FR-PUB-02)
-- [ ] **P3-14** `M` Apply button: logged-out → login with `next`; logged-in candidate → `/apply/{id}`
-- [ ] **P3-15** `C` Duplicate requisition (FR-JR-07)
+- [x] **P3-08** `M` `GET /api/v1/jobs` — **published only**
+- [x] **P3-09** `M` `GET /api/v1/jobs/{slug}` — 404 if draft/closed
+- [x] **P3-10** `M` `/jobs` listing cards: title, department, location, type, experience, posted date, Apply, Share
+- [x] **P3-11** `M` `/jobs/[slug]` detail: description, overview rail, Apply, Share
+- [x] **P3-12** `M` Share: copy canonical public URL (Web Share API if available); no login
+- [x] **P3-13** `S` Search `q` + filters: department, location, experience (FR-PUB-02)
+- [x] **P3-14** `M` Apply button: logged-out → login with `next`; logged-in candidate → `/apply/{id}`
+- [x] **P3-15** `C` Duplicate requisition (FR-JR-07)
 
 ### Exit criteria
 
-- [ ] Published job visible without login (AC 11.1)
-- [ ] Draft and Closed **not** on public listing or detail (AC 11.1)
-- [ ] Edit of a published job shows on the public page
-- [ ] Close removes it from public; admin can still open it
-- [ ] Share works while logged out
+- [x] Published job visible without login (AC 11.1)
+- [x] Draft and Closed **not** on public listing or detail (AC 11.1)
+- [x] Edit of a published job shows on the public page
+- [x] Close removes it from public; admin can still open it
+- [x] Share works while logged out
+
+> **Phase 3 Status:** Completed. Implemented Requisitions API, auto sequential code & unique slug generation, HTML sanitization, admin CRUD lifecycle endpoints (create/draft/publish/close/duplicate), public job search and filter endpoints, Next.js Public Careers portal (`/jobs`, `/jobs/[slug]`, `/`), anonymous sharing (Web Share API + clipboard fallback with toasts), and Next.js Admin Requisitions Console (`/admin/requisitions`, `/admin/requisitions/new`, `/admin/requisitions/[id]/edit`). All 26 backend tests pass; Next.js production build succeeds with 0 errors.
 
 ---
 
