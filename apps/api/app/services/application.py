@@ -4,12 +4,12 @@ from datetime import datetime, timezone
 from typing import Optional, List, Dict, Any
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 
 from app.models.application import Application
 from app.models.requisition import Requisition
 from app.models.user import User, CandidateProfile, Education, Experience
-from app.models.enums import ApplicationStatus, RequisitionStatus
+from app.models.enums import ApplicationStatus, RequisitionStatus, UserRole
 from app.schemas.application import ApplicationDraftSave
 from app.services.storage import get_storage
 from app.services.profile import get_or_create_candidate_profile, calculate_experience_years
@@ -442,3 +442,257 @@ def get_candidate_application_detail(
             },
         )
     return application
+
+
+def _format_admin_application_list_item(app: Application) -> Dict[str, Any]:
+    """Helper to convert Application ORM object into AdminApplicationListItem structure."""
+    snapshot = app.snapshot_json or {}
+    cand_snapshot = snapshot.get("candidate", {})
+    prof_snapshot = snapshot.get("profile", {})
+
+    # Candidate Name
+    cand_first = cand_snapshot.get("first_name") or (app.candidate.first_name if app.candidate else "")
+    cand_last = cand_snapshot.get("last_name") or (app.candidate.last_name if app.candidate else "")
+    cand_name = f"{cand_first} {cand_last}".strip()
+
+    # Candidate Email & Mobile
+    cand_email = cand_snapshot.get("email") or (app.candidate.email if app.candidate else "")
+    cand_mobile = cand_snapshot.get("mobile") or (app.candidate.mobile if app.candidate else None)
+
+    # Location & Total Exp
+    location = prof_snapshot.get("current_location")
+    if not location and app.candidate and app.candidate.candidate_profile:
+        location = app.candidate.candidate_profile.current_location
+
+    total_exp = snapshot.get("total_experience_years", 0.0)
+    if not total_exp and prof_snapshot.get("total_experience_years") is not None:
+        total_exp = prof_snapshot.get("total_experience_years", 0.0)
+
+    return {
+        "id": app.id,
+        "application_code": app.application_code,
+        "requisition_id": app.requisition_id,
+        "requisition_title": app.requisition.title if app.requisition else "",
+        "requisition_code": app.requisition.requisition_code if app.requisition else "",
+        "candidate_id": app.candidate_id,
+        "candidate_name": cand_name,
+        "candidate_email": cand_email,
+        "candidate_mobile": cand_mobile,
+        "candidate_location": location,
+        "total_experience_years": total_exp,
+        "status": app.status,
+        "resume_filename": app.resume_filename,
+        "resume_url": f"/api/v1/files/resumes/{app.id}",
+        "submitted_at": app.submitted_at,
+        "created_at": app.created_at,
+    }
+
+
+def list_admin_applications(
+    db: Session,
+    requisition_id: Optional[uuid.UUID] = None,
+    q: Optional[str] = None,
+    status: Optional[ApplicationStatus] = None,
+    skip: int = 0,
+    limit: int = 100,
+) -> List[Dict[str, Any]]:
+    """List submitted applications for admin review with filtering and search."""
+    query = (
+        db.query(Application)
+        .join(Application.requisition)
+        .join(Application.candidate)
+        .filter(Application.status != ApplicationStatus.DRAFT)
+    )
+
+    if requisition_id:
+        query = query.filter(Application.requisition_id == requisition_id)
+
+    if status:
+        query = query.filter(Application.status == status)
+
+    if q and q.strip():
+        term = f"%{q.strip()}%"
+        query = query.filter(
+            or_(
+                User.first_name.ilike(term),
+                User.last_name.ilike(term),
+                User.email.ilike(term),
+                Application.application_code.ilike(term),
+            )
+        )
+
+    apps = (
+        query.order_by(desc(Application.submitted_at), desc(Application.created_at))
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+
+    return [_format_admin_application_list_item(app) for app in apps]
+
+
+def get_admin_application_detail(
+    db: Session, application_id: uuid.UUID
+) -> Dict[str, Any]:
+    """Get full admin application snapshot and review details."""
+    app = (
+        db.query(Application)
+        .filter(
+            Application.id == application_id,
+            Application.status != ApplicationStatus.DRAFT,
+        )
+        .first()
+    )
+    if not app:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": {
+                    "code": "NOT_FOUND",
+                    "message": "Application record not found",
+                }
+            },
+        )
+
+    snapshot = app.snapshot_json or {}
+    cand_snapshot = snapshot.get("candidate", {})
+    prof_snapshot = snapshot.get("profile", {})
+
+    cand_first = cand_snapshot.get("first_name") or (app.candidate.first_name if app.candidate else "")
+    cand_last = cand_snapshot.get("last_name") or (app.candidate.last_name if app.candidate else "")
+    cand_name = f"{cand_first} {cand_last}".strip()
+
+    cand_email = cand_snapshot.get("email") or (app.candidate.email if app.candidate else "")
+    cand_mobile = cand_snapshot.get("mobile") or (app.candidate.mobile if app.candidate else None)
+
+    location = prof_snapshot.get("current_location")
+    if not location and app.candidate and app.candidate.candidate_profile:
+        location = app.candidate.candidate_profile.current_location
+
+    total_exp = snapshot.get("total_experience_years", 0.0)
+    if not total_exp and prof_snapshot.get("total_experience_years") is not None:
+        total_exp = prof_snapshot.get("total_experience_years", 0.0)
+
+    req = app.requisition
+    req_summary = {
+        "id": req.id,
+        "title": req.title,
+        "requisition_code": req.requisition_code,
+        "slug": req.slug,
+        "department": req.department,
+        "location": req.location,
+        "employment_type": req.employment_type.value if hasattr(req.employment_type, "value") else str(req.employment_type),
+        "status": req.status.value if hasattr(req.status, "value") else str(req.status),
+    }
+
+    return {
+        "id": app.id,
+        "application_code": app.application_code,
+        "requisition_id": app.requisition_id,
+        "requisition": req_summary,
+        "candidate_id": app.candidate_id,
+        "candidate_name": cand_name,
+        "candidate_email": cand_email,
+        "candidate_mobile": cand_mobile,
+        "candidate_location": location,
+        "total_experience_years": total_exp,
+        "status": app.status,
+        "cover_note": app.cover_note,
+        "resume_filename": app.resume_filename,
+        "resume_content_type": app.resume_content_type,
+        "resume_url": f"/api/v1/files/resumes/{app.id}",
+        "consent_accuracy": app.consent_accuracy,
+        "consent_privacy": app.consent_privacy,
+        "submitted_at": app.submitted_at,
+        "snapshot_json": app.snapshot_json,
+        "created_at": app.created_at,
+        "updated_at": app.updated_at,
+    }
+
+
+def update_application_status(
+    db: Session, application_id: uuid.UUID, new_status: ApplicationStatus
+) -> Dict[str, Any]:
+    """Update application review status."""
+    if new_status == ApplicationStatus.DRAFT:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "error": {
+                    "code": "VALIDATION_ERROR",
+                    "message": "Cannot set application status back to draft",
+                }
+            },
+        )
+
+    app = db.query(Application).filter(Application.id == application_id).first()
+    if not app:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "error": {
+                    "code": "NOT_FOUND",
+                    "message": "Application record not found",
+                }
+            },
+        )
+
+    app.status = new_status
+    db.commit()
+    db.refresh(app)
+
+    return get_admin_application_detail(db, application_id)
+
+
+def export_applications_csv(
+    db: Session,
+    requisition_id: Optional[uuid.UUID] = None,
+    q: Optional[str] = None,
+    status: Optional[ApplicationStatus] = None,
+) -> str:
+    """Generate CSV string for applications export."""
+    import csv
+    import io
+
+    apps = list_admin_applications(
+        db,
+        requisition_id=requisition_id,
+        q=q,
+        status=status,
+        skip=0,
+        limit=10000,
+    )
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([
+        "Application Code",
+        "Requisition Code",
+        "Job Title",
+        "Candidate Name",
+        "Email",
+        "Mobile",
+        "Location",
+        "Experience (Years)",
+        "Status",
+        "Submitted At",
+        "Resume URL",
+    ])
+
+    for a in apps:
+        writer.writerow([
+            a["application_code"],
+            a["requisition_code"],
+            a["requisition_title"],
+            a["candidate_name"],
+            a["candidate_email"],
+            a["candidate_mobile"] or "",
+            a["candidate_location"] or "",
+            a["total_experience_years"],
+            a["status"].value if hasattr(a["status"], "value") else str(a["status"]),
+            a["submitted_at"].isoformat() if a["submitted_at"] else "",
+            a["resume_url"],
+        ])
+
+    return output.getvalue()
+

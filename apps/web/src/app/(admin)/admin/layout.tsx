@@ -21,10 +21,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
 
-  const navItems = [
+  interface NavItem {
+    label: string;
+    href: string;
+    icon: any;
+    badge?: string;
+  }
+
+  const navItems: NavItem[] = [
     { label: 'Requisitions', href: '/admin/requisitions', icon: Layers },
-    { label: 'Applications', href: '/admin/applications', icon: Users, badge: 'Phase 7' },
-    { label: 'Notifications', href: '/admin/notifications', icon: Bell, badge: 'Phase 6' },
+    { label: 'Applications', href: '/admin/applications', icon: Users },
+    { label: 'Notifications', href: '/admin/notifications', icon: Bell },
   ];
 
   return (

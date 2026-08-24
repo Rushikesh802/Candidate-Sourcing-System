@@ -320,10 +320,14 @@ export default function AdminRequisitionsPage() {
 
                     {/* Application Count */}
                     <td className="py-4 px-4 text-center">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                      <Link
+                        href={`/admin/requisitions/${req.id}/applications`}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition"
+                        title="View Applicants"
+                      >
                         <Users className="h-3 w-3" />
-                        {req.applications_count ?? 0}
-                      </span>
+                        <span>{req.applications_count ?? 0}</span>
+                      </Link>
                     </td>
 
                     {/* Status */}
@@ -337,6 +341,15 @@ export default function AdminRequisitionsPage() {
                     {/* Actions */}
                     <td className="py-4 px-4 text-right">
                       <div className="flex items-center justify-end gap-1.5">
+                        {/* View Applicants Grid */}
+                        <Link
+                          href={`/admin/requisitions/${req.id}/applications`}
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition"
+                          title="View applicants grid"
+                        >
+                          <Users className="h-4 w-4" />
+                        </Link>
+
                         {/* View Public Page Link (if published) */}
                         {req.status === 'published' && (
                           <Link

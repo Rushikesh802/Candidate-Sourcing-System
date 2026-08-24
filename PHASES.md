@@ -254,23 +254,25 @@ Share: Job Detail → copy public link (no login)
 
 ### Tasks
 
-- [ ] **P7-01** `M` `GET /api/v1/admin/requisitions/{id}/applications` — name, applied on, experience, location, resume link, status
-- [ ] **P7-02** `M` Grid UI matching wireframe 8.2
-- [ ] **P7-03** `M` Resume “View” streams file (admin authz) (FR-ADM-02, AC 11.5)
-- [ ] **P7-04** `M` `GET /api/v1/admin/applications/{id}` — full snapshot: bio, education, experience, cover note, resume
-- [ ] **P7-05** `M` Full application page (row click)
-- [ ] **P7-06** `M` `PATCH .../status` — `new` / `reviewed` / `shortlisted` / `rejected` (FR-ADM-04)
-- [ ] **P7-07** `S` Search by name/email + filter by status (FR-ADM-03)
-- [ ] **P7-08** `S` CSV export with resume links (FR-ADM-05)
-- [ ] **P7-09** `S` Cross-requisition view or “All applications” with job column (FR-ADM-07)
-- [ ] **P7-10** `M` Candidate cannot access admin application endpoints (403)
+- [x] **P7-01** `M` `GET /api/v1/admin/requisitions/{id}/applications` — name, applied on, experience, location, resume link, status
+- [x] **P7-02** `M` Grid UI matching wireframe 8.2
+- [x] **P7-03** `M` Resume “View” streams file (admin authz) (FR-ADM-02, AC 11.5)
+- [x] **P7-04** `M` `GET /api/v1/admin/applications/{id}` — full snapshot: bio, education, experience, cover note, resume
+- [x] **P7-05** `M` Full application page (row click)
+- [x] **P7-06** `M` `PATCH .../status` — `new` / `reviewed` / `shortlisted` / `rejected` (FR-ADM-04)
+- [x] **P7-07** `S` Search by name/email + filter by status (FR-ADM-03)
+- [x] **P7-08** `S` CSV export with resume links (FR-ADM-05)
+- [x] **P7-09** `S` Cross-requisition view or “All applications” with job column (FR-ADM-07)
+- [x] **P7-10** `M` Candidate cannot access admin application endpoints (403)
 
 ### Exit criteria
 
-- [ ] Every submitted application for that job appears in the grid (AC 11.5)
-- [ ] Resume link opens/downloads the correct file
-- [ ] Status change persists and shows on candidate My Applications (if P5-13 done)
-- [ ] Grid empty state when a job has zero applications
+- [x] Every submitted application for that job appears in the grid (AC 11.5)
+- [x] Resume link opens/downloads the correct file
+- [x] Status change persists and shows on candidate My Applications (if P5-13 done)
+- [x] Grid empty state when a job has zero applications
+
+> **Phase 7 Status:** Completed. Implemented Admin Applications API endpoints (`/api/v1/admin/requisitions/{id}/applications`, `/api/v1/admin/applications`, `/api/v1/admin/applications/{id}`, status update, CSV exports), RBAC security ensuring non-admin 403 blocks, Requisition Applicant Review Grid matching wireframe 8.2 with inline resume streaming/preview & interactive status changes (`/admin/requisitions/[id]/applications`), Full Application Review Detail page with frozen candidate profile snapshots (`/admin/applications/[id]`), and Cross-Requisition All Applications pipeline dashboard (`/admin/applications`). All 48 backend tests pass; Next.js production build succeeds with 0 errors.
 
 ---
 

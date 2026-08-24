@@ -76,3 +76,56 @@ export interface ApplicationSubmitPayload {
   consent_accuracy: boolean;
   consent_privacy: boolean;
 }
+
+export interface AdminApplicationListItem {
+  id: string;
+  application_code: string;
+  requisition_id: string;
+  requisition_title: string;
+  requisition_code: string;
+  candidate_id: string;
+  candidate_name: string;
+  candidate_email: string;
+  candidate_mobile?: string | null;
+  candidate_location?: string | null;
+  total_experience_years: number;
+  status: ApplicationStatus;
+  resume_filename?: string | null;
+  resume_url: string;
+  submitted_at?: string | null;
+  created_at: string;
+}
+
+export interface AdminApplicationDetail {
+  id: string;
+  application_code: string;
+  requisition_id: string;
+  requisition: {
+    id: string;
+    title: string;
+    requisition_code: string;
+    slug: string;
+    department: string;
+    location: string;
+    employment_type: string;
+    status: string;
+  };
+  candidate_id: string;
+  candidate_name: string;
+  candidate_email: string;
+  candidate_mobile?: string | null;
+  candidate_location?: string | null;
+  total_experience_years: number;
+  status: ApplicationStatus;
+  cover_note?: string | null;
+  resume_filename?: string | null;
+  resume_content_type?: string | null;
+  resume_url: string;
+  consent_accuracy: boolean;
+  consent_privacy: boolean;
+  submitted_at?: string | null;
+  snapshot_json?: ApplicationDetail['snapshot_json'];
+  created_at: string;
+  updated_at: string;
+}
+
