@@ -123,22 +123,22 @@ export function EducationForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200">
+      <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <h3 className="text-base font-semibold text-slate-800 flex items-center gap-2">
-            <GraduationCap className="h-5 w-5 text-blue-600" />
+          <h3 className="text-base font-semibold text-slate-800 dark:text-white flex items-center gap-2">
+            <GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             Education History
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Add your educational qualifications in chronological order.
           </p>
         </div>
         <button
           type="button"
           onClick={handleAdd}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 shadow-sm transition"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm transition active:scale-95"
         >
-          <Plus className="h-3.5 w-3.5 text-slate-600" />
+          <Plus className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400" />
           Add Qualification
         </button>
       </div>
@@ -147,17 +147,17 @@ export function EducationForm({
         {educations.map((edu, idx) => (
           <div
             key={idx}
-            className="p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-4 relative"
+            className="p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-4 relative"
           >
-            <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
-              <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <span className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                 Qualification #{idx + 1}
               </span>
               {educations.length > 1 && (
                 <button
                   type="button"
                   onClick={() => handleRemove(idx)}
-                  className="text-slate-400 hover:text-red-600 text-xs font-medium inline-flex items-center gap-1 transition"
+                  className="text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 text-xs font-semibold inline-flex items-center gap-1 transition active:scale-95"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                   Remove
@@ -167,7 +167,7 @@ export function EducationForm({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Education Level <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -175,7 +175,7 @@ export function EducationForm({
                   onChange={(e) =>
                     handleChange(idx, 'education_level', e.target.value as EducationLevel)
                   }
-                  className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  className="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white transition"
                 >
                   {Object.entries(EDUCATION_LEVEL_LABELS).map(([val, label]) => (
                     <option key={val} value={val}>
@@ -186,7 +186,7 @@ export function EducationForm({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Degree / Course Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -194,17 +194,19 @@ export function EducationForm({
                   value={edu.degree}
                   onChange={(e) => handleChange(idx, 'degree', e.target.value)}
                   placeholder="e.g. B.Tech Computer Science & Engineering"
-                  className={`w-full px-3.5 py-2 text-sm rounded-lg border ${
-                    errors[idx]?.degree ? 'border-red-400 ring-1 ring-red-400' : 'border-slate-300'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white`}
+                  className={`w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border ${
+                    errors[idx]?.degree
+                      ? 'border-red-400 ring-1 ring-red-400 bg-red-50/20 dark:bg-red-950/20 text-slate-900 dark:text-white'
+                      : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white'
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500 transition`}
                 />
                 {errors[idx]?.degree && (
-                  <p className="text-xs text-red-600 mt-1">{errors[idx].degree}</p>
+                  <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors[idx].degree}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Institution / School / University <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -212,19 +214,19 @@ export function EducationForm({
                   value={edu.institution}
                   onChange={(e) => handleChange(idx, 'institution', e.target.value)}
                   placeholder="e.g. Delhi Technological University"
-                  className={`w-full px-3.5 py-2 text-sm rounded-lg border ${
+                  className={`w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border ${
                     errors[idx]?.institution
-                      ? 'border-red-400 ring-1 ring-red-400'
-                      : 'border-slate-300'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white`}
+                      ? 'border-red-400 ring-1 ring-red-400 bg-red-50/20 dark:bg-red-950/20 text-slate-900 dark:text-white'
+                      : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white'
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500 transition`}
                 />
                 {errors[idx]?.institution && (
-                  <p className="text-xs text-red-600 mt-1">{errors[idx].institution}</p>
+                  <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors[idx].institution}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Specialization / Major
                 </label>
                 <input
@@ -232,12 +234,12 @@ export function EducationForm({
                   value={edu.specialization || ''}
                   onChange={(e) => handleChange(idx, 'specialization', e.target.value)}
                   placeholder="e.g. Data Science / Artificial Intelligence"
-                  className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  className="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Year of Passing <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -248,19 +250,19 @@ export function EducationForm({
                   onChange={(e) =>
                     handleChange(idx, 'year_of_passing', parseInt(e.target.value, 10) || '')
                   }
-                  className={`w-full px-3.5 py-2 text-sm rounded-lg border ${
+                  className={`w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border ${
                     errors[idx]?.year_of_passing
-                      ? 'border-red-400 ring-1 ring-red-400'
-                      : 'border-slate-300'
-                  } focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white`}
+                      ? 'border-red-400 ring-1 ring-red-400 bg-red-50/20 dark:bg-red-950/20 text-slate-900 dark:text-white'
+                      : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white'
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500 transition`}
                 />
                 {errors[idx]?.year_of_passing && (
-                  <p className="text-xs text-red-600 mt-1">{errors[idx].year_of_passing}</p>
+                  <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors[idx].year_of_passing}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
                   Grade / Percentage / CGPA
                 </label>
                 <input
@@ -268,7 +270,7 @@ export function EducationForm({
                   value={edu.grade || ''}
                   onChange={(e) => handleChange(idx, 'grade', e.target.value)}
                   placeholder="e.g. 8.5 CGPA or 85%"
-                  className="w-full px-3.5 py-2 text-sm rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  className="w-full px-3.5 py-2.5 text-xs font-medium rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 transition"
                 />
               </div>
             </div>
@@ -276,11 +278,11 @@ export function EducationForm({
         ))}
       </div>
 
-      <div className="flex justify-end pt-4 border-t border-slate-200">
+      <div className="flex justify-end pt-4 border-t border-slate-200 dark:border-slate-800">
         <button
           type="submit"
           disabled={isSaving}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium shadow-sm transition disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md shadow-blue-500/20 transition disabled:opacity-50 active:scale-95"
         >
           {isSaving && <Loader2 className="h-4 w-4 animate-spin" />}
           Save Education Details

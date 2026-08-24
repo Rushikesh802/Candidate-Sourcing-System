@@ -85,7 +85,7 @@ export function NotificationBell() {
           setIsOpen(!isOpen);
           if (!isOpen) loadNotifications();
         }}
-        className="relative p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition"
+        className="relative p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 transition active:scale-95"
         title="Admin Notifications"
       >
         <Bell className="h-5 w-5" />
@@ -97,15 +97,15 @@ export function NotificationBell() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-white border border-slate-200 shadow-xl z-50 overflow-hidden">
+        <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl z-50 overflow-hidden">
           {/* Dropdown Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 bg-slate-50/50">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/80">
             <div className="flex items-center gap-2">
-              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+              <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                 Notifications
               </h4>
               {unreadCount > 0 && (
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
                   {unreadCount} new
                 </span>
               )}
@@ -114,7 +114,7 @@ export function NotificationBell() {
               <button
                 onClick={handleMarkAllRead}
                 disabled={isLoading}
-                className="text-[11px] font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1 disabled:opacity-50"
+                className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center gap-1 disabled:opacity-50"
               >
                 <CheckCheck className="h-3.5 w-3.5" />
                 Mark all read
@@ -123,9 +123,9 @@ export function NotificationBell() {
           </div>
 
           {/* List items */}
-          <div className="max-h-80 overflow-y-auto divide-y divide-slate-100">
+          <div className="max-h-80 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800">
             {notifications.length === 0 ? (
-              <div className="p-6 text-center text-xs text-slate-500">
+              <div className="p-6 text-center text-xs text-slate-500 dark:text-slate-400">
                 No notifications received yet.
               </div>
             ) : (
@@ -138,23 +138,23 @@ export function NotificationBell() {
                     onClick={() => {
                       if (isUnread) handleMarkOneRead(notif.id);
                     }}
-                    className={`p-3.5 hover:bg-slate-50 transition cursor-pointer flex items-start gap-3 ${
-                      isUnread ? 'bg-blue-50/40' : ''
+                    className={`p-3.5 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition cursor-pointer flex items-start gap-3 ${
+                      isUnread ? 'bg-blue-50/50 dark:bg-blue-950/40' : ''
                     }`}
                   >
                     <div
                       className={`h-2 w-2 rounded-full mt-1.5 shrink-0 ${
-                        isUnread ? 'bg-blue-600' : 'bg-transparent'
+                        isUnread ? 'bg-blue-600 dark:bg-blue-400' : 'bg-transparent'
                       }`}
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-slate-900 leading-snug">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white leading-snug">
                         {notif.title}
                       </p>
-                      <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-2 leading-relaxed">
+                      <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5 line-clamp-2 leading-relaxed">
                         {notif.body}
                       </p>
-                      <span className="text-[10px] text-slate-400 mt-1 block">
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-1 block">
                         {formatRelativeDate(notif.created_at)}
                       </span>
                     </div>
@@ -165,11 +165,11 @@ export function NotificationBell() {
           </div>
 
           {/* Dropdown Footer */}
-          <div className="p-2 border-t border-slate-100 bg-slate-50/50 text-center">
+          <div className="p-2.5 border-t border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/80 text-center">
             <Link
               href="/admin/notifications"
               onClick={() => setIsOpen(false)}
-              className="text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1 py-1"
+              className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center gap-1 py-1"
             >
               <span>View All Notifications</span>
               <ExternalLink className="h-3 w-3" />

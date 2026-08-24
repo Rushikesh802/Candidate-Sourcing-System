@@ -1,4 +1,4 @@
-﻿import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   darkMode: 'class',
@@ -11,17 +11,17 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          50: '#f0f5ff',
-          100: '#e0ecff',
-          200: '#c7dcfe',
-          300: '#9ec4fd',
-          400: '#6ea3fb',
-          500: '#437ef7',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
           600: '#2563eb',
           700: '#1d4ed8',
           800: '#1e40af',
           900: '#1e3a8a',
-          950: '#0f172a',
+          950: '#0a1945',
         },
         accent: {
           50: '#ecfdf5',
@@ -34,12 +34,16 @@ const config: Config = {
           700: '#047857',
           800: '#065f46',
           900: '#064e3b',
+          950: '#022c22',
         },
         surface: {
           50: '#f8fafc',
           100: '#f1f5f9',
           200: '#e2e8f0',
           300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
           700: '#334155',
           800: '#1e293b',
           900: '#0f172a',

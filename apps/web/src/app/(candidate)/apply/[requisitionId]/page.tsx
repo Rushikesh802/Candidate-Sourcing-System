@@ -373,49 +373,49 @@ export default function ApplyWizardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-10 transition-colors duration-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
         {/* Top Navigation Back */}
         <div className="flex items-center justify-between">
           <button
             onClick={() => router.back()}
-            className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900 font-medium transition"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Job Details
           </button>
-          <span className="text-xs text-slate-400 font-mono">
+          <span className="text-xs text-slate-400 dark:text-slate-500 font-mono">
             Position ID: {job?.requisition_code || requisitionId}
           </span>
         </div>
 
         {/* Job Header Card */}
         {job && (
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">
+              <div className="flex items-center gap-2 text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-1">
                 <span>Applying for</span>
                 <span>•</span>
                 <span>{job.department}</span>
               </div>
-              <h1 className="text-xl font-bold text-slate-900">{job.title}</h1>
-              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mt-2">
-                <span className="flex items-center gap-1">
+              <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{job.title}</h1>
+              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 mt-2">
+                <span className="flex items-center gap-1.5">
                   <MapPin className="h-3.5 w-3.5 text-slate-400" />
                   {job.location}
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5 text-slate-400" />
                   {job.employment_type?.replace('_', ' ')}
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1.5">
                   <Briefcase className="h-3.5 w-3.5 text-slate-400" />
                   {job.experience_range}
                 </span>
               </div>
             </div>
             <div className="sm:text-right shrink-0">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                 <CheckCircle2 className="h-3.5 w-3.5" />
                 Active Opening
               </span>
@@ -424,40 +424,39 @@ export default function ApplyWizardPage() {
         )}
 
         {/* 4-Step Progress Indicator */}
-        <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {STEPS.map((step) => {
-              const Icon = step.icon;
               const isCompleted = currentStep > step.id;
               const isCurrent = currentStep === step.id;
 
               return (
                 <div
                   key={step.id}
-                  className={`flex items-center gap-3 p-3 rounded-xl border transition ${
+                  className={`flex items-center gap-3 p-3 rounded-2xl border transition ${
                     isCurrent
-                      ? 'bg-blue-50/80 border-blue-300 ring-1 ring-blue-300 text-blue-900'
+                      ? 'bg-blue-50/80 dark:bg-blue-950/40 border-blue-300 dark:border-blue-800 ring-1 ring-blue-300 dark:ring-blue-800 text-blue-900 dark:text-blue-200'
                       : isCompleted
-                      ? 'bg-emerald-50/50 border-emerald-200 text-emerald-900'
-                      : 'bg-slate-50 border-slate-200 text-slate-400'
+                      ? 'bg-emerald-50/50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/80 text-emerald-900 dark:text-emerald-200'
+                      : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500'
                   }`}
                 >
                   <div
-                    className={`h-8 w-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ${
+                    className={`h-8 w-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 ${
                       isCurrent
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-blue-600 text-white shadow-sm'
                         : isCompleted
-                        ? 'bg-emerald-600 text-white'
-                        : 'bg-slate-200 text-slate-500'
+                        ? 'bg-emerald-600 text-white shadow-sm'
+                        : 'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
                     }`}
                   >
                     {isCompleted ? <CheckCircle2 className="h-4 w-4" /> : step.id}
                   </div>
                   <div className="min-w-0">
-                    <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-400">
+                    <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400 dark:text-slate-500">
                       Step {step.id}
                     </p>
-                    <p className="text-xs font-bold truncate">{step.name}</p>
+                    <p className="text-xs font-bold truncate text-slate-800 dark:text-slate-200">{step.name}</p>
                   </div>
                 </div>
               );
@@ -466,13 +465,13 @@ export default function ApplyWizardPage() {
         </div>
 
         {/* Step Panels */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
           {/* STEP 1: Bio Data */}
           {currentStep === 1 && profileData && (
             <div>
-              <div className="mb-6 pb-4 border-b border-slate-200">
-                <h3 className="text-lg font-bold text-slate-900">Step 1: Personal Bio-Data</h3>
-                <p className="text-xs text-slate-500 mt-1">
+              <div className="mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Step 1: Personal Bio-Data</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Review and verify your contact details and basic information.
                 </p>
               </div>
@@ -489,17 +488,17 @@ export default function ApplyWizardPage() {
           {/* STEP 2: Education */}
           {currentStep === 2 && (
             <div>
-              <div className="mb-6 pb-4 border-b border-slate-200 flex items-center justify-between">
+              <div className="mb-6 pb-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900">Step 2: Educational Background</h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Step 2: Educational Background</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     Provide at least one educational qualification.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="text-xs font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1"
+                  className="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white flex items-center gap-1 transition"
                 >
                   <ChevronLeft className="h-4 w-4" /> Back
                 </button>
@@ -515,17 +514,17 @@ export default function ApplyWizardPage() {
           {/* STEP 3: Work Experience */}
           {currentStep === 3 && (
             <div>
-              <div className="mb-6 pb-4 border-b border-slate-200 flex items-center justify-between">
+              <div className="mb-6 pb-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900">Step 3: Work Experience</h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Step 3: Work Experience</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     List your professional work history or toggle Fresher status.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setCurrentStep(2)}
-                  className="text-xs font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1"
+                  className="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white flex items-center gap-1 transition"
                 >
                   <ChevronLeft className="h-4 w-4" /> Back
                 </button>
@@ -543,17 +542,17 @@ export default function ApplyWizardPage() {
           {/* STEP 4: Resume & Submit */}
           {currentStep === 4 && (
             <form onSubmit={handleFinalSubmit} className="space-y-6">
-              <div className="mb-6 pb-4 border-b border-slate-200 flex items-center justify-between">
+              <div className="mb-6 pb-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 <div>
-                  <h3 className="text-lg font-bold text-slate-900">Step 4: Resume & Submit</h3>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Step 4: Resume &amp; Submit</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     Upload your mandatory resume file, add an optional cover note, and provide consents.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setCurrentStep(3)}
-                  className="text-xs font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1"
+                  className="text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white flex items-center gap-1 transition"
                 >
                   <ChevronLeft className="h-4 w-4" /> Back
                 </button>
@@ -561,7 +560,7 @@ export default function ApplyWizardPage() {
 
               {/* Resume File Upload Box */}
               <div>
-                <label className="block text-sm font-bold text-slate-800 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                   Upload Resume / CV <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -573,16 +572,16 @@ export default function ApplyWizardPage() {
                 />
 
                 {resumeFile ? (
-                  <div className="p-4 rounded-xl border border-blue-200 bg-blue-50/60 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl border border-blue-200 dark:border-blue-800 bg-blue-50/60 dark:bg-blue-950/40 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
                         <FileCheck className="h-5 w-5" />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-slate-900 truncate max-w-sm">
+                        <p className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-sm">
                           {resumeFile.name}
                         </p>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
                           {(resumeFile.size / (1024 * 1024)).toFixed(2)} MB • Ready for submission
                         </p>
                       </div>
@@ -590,7 +589,7 @@ export default function ApplyWizardPage() {
                     <button
                       type="button"
                       onClick={() => setResumeFile(null)}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-white transition"
+                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-white dark:hover:bg-slate-800 transition active:scale-95"
                     >
                       <X className="h-5 w-5" />
                     </button>
@@ -598,21 +597,23 @@ export default function ApplyWizardPage() {
                 ) : (
                   <div
                     onClick={() => resumeInputRef.current?.click()}
-                    className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition hover:bg-slate-50 ${
-                      step4Errors.resume ? 'border-red-400 bg-red-50/40' : 'border-slate-300'
+                    className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition hover:bg-slate-50 dark:hover:bg-slate-800/40 ${
+                      step4Errors.resume
+                        ? 'border-red-400 bg-red-50/40 dark:bg-red-950/20'
+                        : 'border-slate-300 dark:border-slate-700 bg-slate-50/30 dark:bg-slate-800/20'
                     }`}
                   >
-                    <div className="h-12 w-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3">
+                    <div className="h-12 w-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto mb-3 border border-blue-100 dark:border-blue-800 shadow-inner">
                       <Upload className="h-6 w-6" />
                     </div>
-                    <p className="text-sm font-semibold text-slate-800">
+                    <p className="text-sm font-bold text-slate-800 dark:text-slate-200">
                       Click here to select your resume
                     </p>
-                    <p className="text-xs text-slate-500 mt-1">Supported: PDF, DOC, DOCX (Max 5 MB)</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Supported: PDF, DOC, DOCX (Max 5 MB)</p>
                   </div>
                 )}
                 {step4Errors.resume && (
-                  <p className="text-xs text-red-600 mt-1.5 flex items-center gap-1 font-medium">
+                  <p className="text-xs text-red-600 dark:text-red-400 mt-1.5 flex items-center gap-1 font-medium">
                     <AlertCircle className="h-3.5 w-3.5" />
                     {step4Errors.resume}
                   </p>
@@ -621,8 +622,8 @@ export default function ApplyWizardPage() {
 
               {/* Cover Note Textarea */}
               <div>
-                <label className="block text-sm font-bold text-slate-800 mb-1">
-                  Cover Note <span className="text-slate-400 font-normal text-xs">(Optional)</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                  Cover Note <span className="text-slate-400 dark:text-slate-500 font-normal text-xs">(Optional)</span>
                 </label>
                 <textarea
                   rows={4}
@@ -630,17 +631,17 @@ export default function ApplyWizardPage() {
                   onChange={(e) => setCoverNote(e.target.value)}
                   maxLength={3000}
                   placeholder="Introduce yourself, highlight specific qualifications, and mention why you are the ideal fit for this requisition..."
-                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-4 py-3 text-xs font-medium rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none transition"
                 />
-                <div className="text-right text-[11px] text-slate-400 mt-0.5">
+                <div className="text-right text-[11px] text-slate-400 dark:text-slate-500 mt-1">
                   {coverNote.length}/3000 characters
                 </div>
               </div>
 
               {/* Consents & Declarations */}
-              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3">
-                <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Mandatory Consents & Declarations
+              <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-3">
+                <h4 className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                  Mandatory Consents &amp; Declarations
                 </h4>
 
                 <label className="flex items-start gap-3 cursor-pointer">
@@ -657,16 +658,16 @@ export default function ApplyWizardPage() {
                         });
                       }
                     }}
-                    className="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                    className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 cursor-pointer"
                   />
-                  <span className="text-xs text-slate-700">
-                    <span className="font-semibold text-slate-900">Accuracy Declaration:</span> I hereby
+                  <span className="text-xs text-slate-700 dark:text-slate-300">
+                    <span className="font-bold text-slate-900 dark:text-white">Accuracy Declaration:</span> I hereby
                     confirm that all information provided in this application, including education,
                     experience, and documents, is accurate and true. <span className="text-red-500">*</span>
                   </span>
                 </label>
                 {step4Errors.consentAccuracy && (
-                  <p className="text-xs text-red-600 pl-7">{step4Errors.consentAccuracy}</p>
+                  <p className="text-xs text-red-600 dark:text-red-400 pl-7">{step4Errors.consentAccuracy}</p>
                 )}
 
                 <label className="flex items-start gap-3 cursor-pointer">
@@ -683,25 +684,25 @@ export default function ApplyWizardPage() {
                         });
                       }
                     }}
-                    className="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                    className="mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 cursor-pointer"
                   />
-                  <span className="text-xs text-slate-700">
-                    <span className="font-semibold text-slate-900">Privacy Policy Consent:</span> I agree
+                  <span className="text-xs text-slate-700 dark:text-slate-300">
+                    <span className="font-bold text-slate-900 dark:text-white">Privacy Policy Consent:</span> I agree
                     to the processing and retention of my personal data for recruitment and evaluation
                     purposes. <span className="text-red-500">*</span>
                   </span>
                 </label>
                 {step4Errors.consentPrivacy && (
-                  <p className="text-xs text-red-600 pl-7">{step4Errors.consentPrivacy}</p>
+                  <p className="text-xs text-red-600 dark:text-red-400 pl-7">{step4Errors.consentPrivacy}</p>
                 )}
               </div>
 
               {/* Submit Buttons */}
-              <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+              <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setCurrentStep(3)}
-                  className="px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900"
+                  className="px-4 py-2.5 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition"
                 >
                   Previous Step
                 </button>
@@ -709,7 +710,7 @@ export default function ApplyWizardPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || !resumeFile || !consentAccuracy || !consentPrivacy}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md transition disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-500/20 transition disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
                 >
                   {isSubmitting ? (
                     <>
@@ -718,7 +719,7 @@ export default function ApplyWizardPage() {
                     </>
                   ) : (
                     <>
-                      Submit Final Application
+                      <span>Submit Final Application</span>
                       <ChevronRight className="h-4 w-4" />
                     </>
                   )}

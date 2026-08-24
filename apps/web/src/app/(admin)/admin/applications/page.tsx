@@ -33,37 +33,37 @@ const STATUS_CONFIG: Record<
 > = {
   draft: {
     label: 'Draft',
-    bg: 'bg-slate-100',
-    text: 'text-slate-600',
-    border: 'border-slate-300',
+    bg: 'bg-slate-100 dark:bg-slate-800',
+    text: 'text-slate-700 dark:text-slate-300',
+    border: 'border-slate-300 dark:border-slate-700',
     icon: Clock,
   },
   new: {
     label: 'New',
-    bg: 'bg-blue-50',
-    text: 'text-blue-700',
-    border: 'border-blue-200',
+    bg: 'bg-blue-50 dark:bg-blue-950/60',
+    text: 'text-blue-700 dark:text-blue-300',
+    border: 'border-blue-200 dark:border-blue-800',
     icon: SparklesIcon,
   },
   reviewed: {
     label: 'Under Review',
-    bg: 'bg-purple-50',
-    text: 'text-purple-700',
-    border: 'border-purple-200',
+    bg: 'bg-purple-50 dark:bg-purple-950/60',
+    text: 'text-purple-700 dark:text-purple-300',
+    border: 'border-purple-200 dark:border-purple-800',
     icon: Clock,
   },
   shortlisted: {
     label: 'Shortlisted',
-    bg: 'bg-emerald-50',
-    text: 'text-emerald-700',
-    border: 'border-emerald-200',
+    bg: 'bg-emerald-50 dark:bg-emerald-950/60',
+    text: 'text-emerald-700 dark:text-emerald-300',
+    border: 'border-emerald-200 dark:border-emerald-800',
     icon: CheckCircle2,
   },
   rejected: {
     label: 'Rejected',
-    bg: 'bg-rose-50',
-    text: 'text-rose-700',
-    border: 'border-rose-200',
+    bg: 'bg-rose-50 dark:bg-rose-950/60',
+    text: 'text-rose-700 dark:text-rose-300',
+    border: 'border-rose-200 dark:border-rose-800',
     icon: XCircle,
   },
 };
@@ -197,13 +197,13 @@ export default function AllApplicationsPage() {
       {/* Top Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>All Candidate Applications</span>
-            <span className="text-xs font-bold font-mono px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">
+            <span className="text-xs font-bold font-mono px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               {applications.length}
             </span>
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Cross-requisition applicant pipeline, resume screening, and status management.
           </p>
         </div>
@@ -213,7 +213,7 @@ export default function AllApplicationsPage() {
           <button
             onClick={loadData}
             disabled={isLoading}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm active:scale-95"
             title="Refresh"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />
@@ -223,7 +223,7 @@ export default function AllApplicationsPage() {
           <button
             onClick={handleExportCSV}
             disabled={applications.length === 0}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition shadow-sm disabled:opacity-50 disabled:pointer-events-none"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/60 transition shadow-sm disabled:opacity-50 disabled:pointer-events-none active:scale-95"
           >
             <Download className="h-3.5 w-3.5" />
             <span>Export CSV</span>
@@ -234,29 +234,29 @@ export default function AllApplicationsPage() {
       {/* Feedback Banner */}
       {feedbackMsg && (
         <div
-          className={`p-3 rounded-lg text-xs font-semibold flex items-center justify-between border ${
+          className={`p-3.5 rounded-xl text-xs font-semibold flex items-center justify-between border ${
             feedbackMsg.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-              : 'bg-rose-50 text-rose-800 border-rose-200'
+              ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
+              : 'bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800'
           }`}
         >
           <span>{feedbackMsg.text}</span>
-          <button onClick={() => setFeedbackMsg(null)} className="text-slate-400 hover:text-slate-700">
+          <button onClick={() => setFeedbackMsg(null)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
             <X className="h-4 w-4" />
           </button>
         </div>
       )}
 
       {/* Filter and Search Toolbar */}
-      <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-4 space-y-3">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800/90 shadow-sm p-4 space-y-3">
         {/* Status Pill Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
           <button
             onClick={() => setStatusFilter('all')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition whitespace-nowrap ${
               statusFilter === 'all'
-                ? 'bg-slate-900 text-white shadow-sm'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                ? 'bg-slate-900 dark:bg-blue-600 text-white shadow-sm'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             All Candidates ({counts.all})
@@ -266,7 +266,7 @@ export default function AllApplicationsPage() {
             className={`px-3 py-1.5 rounded-lg font-semibold transition whitespace-nowrap ${
               statusFilter === 'new'
                 ? 'bg-blue-600 text-white shadow-sm'
-                : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                : 'bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/60'
             }`}
           >
             New ({counts.new})
@@ -276,7 +276,7 @@ export default function AllApplicationsPage() {
             className={`px-3 py-1.5 rounded-lg font-semibold transition whitespace-nowrap ${
               statusFilter === 'reviewed'
                 ? 'bg-purple-600 text-white shadow-sm'
-                : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
+                : 'bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/60'
             }`}
           >
             Under Review ({counts.reviewed})
@@ -286,7 +286,7 @@ export default function AllApplicationsPage() {
             className={`px-3 py-1.5 rounded-lg font-semibold transition whitespace-nowrap ${
               statusFilter === 'shortlisted'
                 ? 'bg-emerald-600 text-white shadow-sm'
-                : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60'
             }`}
           >
             Shortlisted ({counts.shortlisted})
@@ -296,7 +296,7 @@ export default function AllApplicationsPage() {
             className={`px-3 py-1.5 rounded-lg font-semibold transition whitespace-nowrap ${
               statusFilter === 'rejected'
                 ? 'bg-rose-600 text-white shadow-sm'
-                : 'bg-rose-50 text-rose-700 hover:bg-rose-100'
+                : 'bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 hover:bg-rose-100 dark:hover:bg-rose-900/60'
             }`}
           >
             Rejected ({counts.rejected})
@@ -306,18 +306,18 @@ export default function AllApplicationsPage() {
         {/* Search Bar + Requisition Dropdown */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div className="md:col-span-2 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search candidate name, email, application ID, or job title..."
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs"
               >
                 Clear
               </button>
@@ -328,7 +328,7 @@ export default function AllApplicationsPage() {
             <select
               value={requisitionFilter}
               onChange={(e) => setRequisitionFilter(e.target.value)}
-              className="w-full py-2 px-3 text-xs rounded-lg border border-slate-300 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full py-2.5 px-3 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
             >
               <option value="all">All Requisitions ({requisitions.length})</option>
               {requisitions.map((req) => (
@@ -342,19 +342,19 @@ export default function AllApplicationsPage() {
       </div>
 
       {/* Cross Requisitions Grid Table */}
-      <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800/90 shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="py-20 flex flex-col items-center justify-center text-slate-400">
-            <RefreshCw className="h-8 w-8 animate-spin mb-3 text-blue-600" />
-            <p className="text-xs font-semibold">Loading applications pipeline...</p>
+            <RefreshCw className="h-8 w-8 animate-spin mb-3 text-blue-600 dark:text-blue-400" />
+            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Loading applications pipeline...</p>
           </div>
         ) : filteredApplications.length === 0 ? (
-          <div className="py-16 text-center px-4">
-            <div className="h-12 w-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
-              <User className="h-6 w-6" />
+          <div className="py-16 text-center px-4 space-y-3">
+            <div className="h-14 w-14 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto border border-blue-100 dark:border-blue-800 shadow-inner">
+              <User className="h-7 w-7" />
             </div>
-            <h3 className="text-sm font-bold text-slate-800">No applications found</h3>
-            <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">No applications found</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
               {applications.length === 0
                 ? 'No candidates have submitted an application yet.'
                 : 'No candidate applications matched your search and filter criteria.'}
@@ -364,41 +364,40 @@ export default function AllApplicationsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-50/80 border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                  <th className="py-3.5 px-4">Candidate</th>
-                  <th className="py-3.5 px-4">Position Applied For</th>
-                  <th className="py-3.5 px-4">Experience</th>
-                  <th className="py-3.5 px-4">Applied On</th>
-                  <th className="py-3.5 px-4">Resume</th>
-                  <th className="py-3.5 px-4">Status</th>
-                  <th className="py-3.5 px-4 text-right">Actions</th>
+                <tr className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  <th className="py-4 px-5">Candidate</th>
+                  <th className="py-4 px-5">Position Applied For</th>
+                  <th className="py-4 px-5">Experience</th>
+                  <th className="py-4 px-5">Applied On</th>
+                  <th className="py-4 px-5">Resume</th>
+                  <th className="py-4 px-5">Status</th>
+                  <th className="py-4 px-5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium text-slate-700 dark:text-slate-300">
                 {filteredApplications.map((app) => {
                   const statusInfo = STATUS_CONFIG[app.status] || STATUS_CONFIG.new;
-                  const StatusIcon = statusInfo.icon;
                   const isPending = isUpdatingStatus === app.id;
 
                   return (
                     <tr
                       key={app.id}
-                      className="hover:bg-slate-50/80 transition group"
+                      className="hover:bg-blue-50/30 dark:hover:bg-slate-800/40 transition-colors group"
                     >
                       {/* Candidate Name & Contact */}
-                      <td className="py-3.5 px-4">
+                      <td className="py-4 px-5">
                         <div className="flex items-center gap-3">
-                          <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center flex-shrink-0">
+                          <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 shadow-sm">
                             {app.candidate_name.charAt(0).toUpperCase() || 'C'}
                           </div>
                           <div>
                             <Link
                               href={`/admin/applications/${app.id}`}
-                              className="font-bold text-slate-900 hover:text-blue-600 transition block text-sm"
+                              className="font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition block text-sm"
                             >
                               {app.candidate_name}
                             </Link>
-                            <div className="flex items-center gap-2 text-[11px] text-slate-500">
+                            <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
                               <span>{app.candidate_email}</span>
                               <span>&bull;</span>
                               <span className="font-mono">{app.application_code}</span>
@@ -408,32 +407,32 @@ export default function AllApplicationsPage() {
                       </td>
 
                       {/* Position / Requisition */}
-                      <td className="py-3.5 px-4">
+                      <td className="py-4 px-5">
                         <Link
                           href={`/admin/requisitions/${app.requisition_id}/applications`}
-                          className="font-semibold text-slate-800 hover:text-blue-600 block"
+                          className="font-semibold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 block"
                         >
                           {app.requisition_title}
                         </Link>
-                        <span className="font-mono text-[11px] text-slate-400">
+                        <span className="font-mono text-[11px] text-slate-400 dark:text-slate-500">
                           {app.requisition_code}
                         </span>
                       </td>
 
                       {/* Experience & Location */}
-                      <td className="py-3.5 px-4">
-                        <span className="font-semibold text-slate-800 block">
+                      <td className="py-4 px-5">
+                        <span className="font-semibold text-slate-900 dark:text-white block">
                           {app.total_experience_years > 0
                             ? `${app.total_experience_years} yrs`
                             : 'Fresher'}
                         </span>
-                        <span className="text-[11px] text-slate-500">
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400">
                           {app.candidate_location || 'Location unlisted'}
                         </span>
                       </td>
 
                       {/* Applied Date */}
-                      <td className="py-3.5 px-4 text-slate-500">
+                      <td className="py-4 px-5 text-slate-500 dark:text-slate-400">
                         {app.submitted_at
                           ? new Date(app.submitted_at).toLocaleDateString('en-US', {
                               month: 'short',
@@ -444,20 +443,20 @@ export default function AllApplicationsPage() {
                       </td>
 
                       {/* Resume */}
-                      <td className="py-3.5 px-4">
+                      <td className="py-4 px-5">
                         <div className="flex items-center gap-1.5">
                           <button
                             onClick={() => setPreviewResumeApp(app)}
-                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition"
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold transition"
                             title="Preview Resume"
                           >
-                            <Eye className="h-3.5 w-3.5 text-slate-500" />
+                            <Eye className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
                             <span>View</span>
                           </button>
                           <a
                             href={app.resume_url}
                             download={app.resume_filename || 'resume.pdf'}
-                            className="p-1 rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
                             title="Download Resume"
                           >
                             <Download className="h-3.5 w-3.5" />
@@ -466,7 +465,7 @@ export default function AllApplicationsPage() {
                       </td>
 
                       {/* Status Selector */}
-                      <td className="py-3.5 px-4">
+                      <td className="py-4 px-5">
                         <div className="relative inline-block">
                           <select
                             value={app.status}
@@ -492,10 +491,10 @@ export default function AllApplicationsPage() {
                       </td>
 
                       {/* Actions */}
-                      <td className="py-3.5 px-4 text-right">
+                      <td className="py-4 px-5 text-right">
                         <Link
                           href={`/admin/applications/${app.id}`}
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white font-semibold transition shadow-xs"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white font-semibold transition shadow-sm active:scale-95"
                         >
                           <span>Review</span>
                           <ChevronRight className="h-3.5 w-3.5" />
@@ -512,19 +511,19 @@ export default function AllApplicationsPage() {
 
       {/* Resume Preview Modal */}
       {previewResumeApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden border border-slate-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-800/60">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center">
+                <div className="h-9 w-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-100 dark:border-blue-800">
                   <FileText className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                     {previewResumeApp.candidate_name} &mdash; Resume
                   </h3>
-                  <p className="text-xs text-slate-500 font-mono">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                     {previewResumeApp.resume_filename || 'Candidate Resume'} &bull; {previewResumeApp.application_code}
                   </p>
                 </div>
@@ -535,22 +534,22 @@ export default function AllApplicationsPage() {
                   href={previewResumeApp.resume_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm active:scale-95"
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
-                  <span>Open in New Tab</span>
+                  <span>Open Tab</span>
                 </a>
                 <a
                   href={previewResumeApp.resume_url}
                   download={previewResumeApp.resume_filename || 'resume.pdf'}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 transition shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/60 transition shadow-sm active:scale-95"
                 >
                   <Download className="h-3.5 w-3.5" />
                   <span>Download</span>
                 </a>
                 <button
                   onClick={() => setPreviewResumeApp(null)}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition ml-2"
+                  className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition ml-2"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -558,7 +557,7 @@ export default function AllApplicationsPage() {
             </div>
 
             {/* Modal Body / Viewer */}
-            <div className="flex-1 bg-slate-100 relative">
+            <div className="flex-1 bg-slate-100 dark:bg-slate-950 relative">
               <iframe
                 src={`${previewResumeApp.resume_url}#toolbar=0`}
                 className="w-full h-full border-0"

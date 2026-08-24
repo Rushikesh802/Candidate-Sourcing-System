@@ -170,16 +170,16 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
   return (
     <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
       {/* Basic Info Section */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
-        <div className="flex items-center gap-2 pb-4 border-b border-slate-100">
-          <Layers className="h-5 w-5 text-blue-600" />
-          <h2 className="text-lg font-bold text-slate-900">Requisition Overview</h2>
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="flex items-center gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
+          <Layers className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Requisition Overview</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Title */}
           <div className="md:col-span-2">
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Job Title <span className="text-red-500">*</span>
             </label>
             <input
@@ -189,22 +189,22 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
               placeholder="e.g. Senior Full Stack Engineer, Product Marketing Lead"
               className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 transition ${
                 errors.title
-                  ? 'border-red-300 focus:ring-red-400 bg-red-50/20'
-                  : 'border-slate-200 focus:ring-blue-500'
+                  ? 'border-red-300 dark:border-red-700 focus:ring-red-400 bg-red-50/20 dark:bg-red-950/20 text-slate-900 dark:text-white'
+                  : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-blue-500'
               }`}
             />
-            {errors.title && <p className="text-xs text-red-600 mt-1">{errors.title}</p>}
+            {errors.title && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.title}</p>}
           </div>
 
           {/* Department */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Department <span className="text-red-500">*</span>
             </label>
             <select
               value={formData.department}
               onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
             >
               {DEPARTMENT_OPTIONS.map((dept) => (
                 <option key={dept} value={dept}>
@@ -216,7 +216,7 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
 
           {/* Location */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Location <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -228,17 +228,17 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
                 placeholder="e.g. Remote, Bengaluru, India, New York, NY"
                 className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 transition ${
                   errors.location
-                    ? 'border-red-300 focus:ring-red-400 bg-red-50/20'
-                    : 'border-slate-200 focus:ring-blue-500'
+                    ? 'border-red-300 dark:border-red-700 focus:ring-red-400 bg-red-50/20 dark:bg-red-950/20 text-slate-900 dark:text-white'
+                    : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-blue-500'
                 }`}
               />
             </div>
-            {errors.location && <p className="text-xs text-red-600 mt-1">{errors.location}</p>}
+            {errors.location && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.location}</p>}
           </div>
 
           {/* Employment Type */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Employment Type <span className="text-red-500">*</span>
             </label>
             <select
@@ -246,7 +246,7 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
               onChange={(e) =>
                 setFormData({ ...formData, employment_type: e.target.value as EmploymentType })
               }
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
             >
               {(Object.keys(EMPLOYMENT_TYPE_LABELS) as EmploymentType[]).map((type) => (
                 <option key={type} value={type}>
@@ -258,13 +258,13 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
 
           {/* Experience Range */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Experience Range <span className="text-red-500">*</span>
             </label>
             <select
               value={formData.experience_range}
               onChange={(e) => setFormData({ ...formData, experience_range: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
             >
               {EXPERIENCE_RANGE_OPTIONS.map((exp) => (
                 <option key={exp} value={exp}>
@@ -276,7 +276,7 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
 
           {/* Openings */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Total Openings <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -289,15 +289,15 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
                 onChange={(e) =>
                   setFormData({ ...formData, openings: parseInt(e.target.value) || 1 })
                 }
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
               />
             </div>
-            {errors.openings && <p className="text-xs text-red-600 mt-1">{errors.openings}</p>}
+            {errors.openings && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.openings}</p>}
           </div>
 
           {/* Hiring Manager */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Hiring Manager <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -309,29 +309,29 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
                 placeholder="e.g. Sarah Connor (VP Engineering)"
                 className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm focus:outline-none focus:ring-2 transition ${
                   errors.hiring_manager
-                    ? 'border-red-300 focus:ring-red-400 bg-red-50/20'
-                    : 'border-slate-200 focus:ring-blue-500'
+                    ? 'border-red-300 dark:border-red-700 focus:ring-red-400 bg-red-50/20 dark:bg-red-950/20 text-slate-900 dark:text-white'
+                    : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-blue-500'
                 }`}
               />
             </div>
             {errors.hiring_manager && (
-              <p className="text-xs text-red-600 mt-1">{errors.hiring_manager}</p>
+              <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.hiring_manager}</p>
             )}
           </div>
         </div>
       </div>
 
       {/* Budget and Timeline Section */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
-        <div className="flex items-center gap-2 pb-4 border-b border-slate-100">
-          <DollarSign className="h-5 w-5 text-emerald-600" />
-          <h2 className="text-lg font-bold text-slate-900">Budget & Target Timeline</h2>
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="flex items-center gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
+          <DollarSign className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Budget &amp; Target Timeline</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Max Salary Budget */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Maximum Salary Budget (Annual INR/USD)
             </label>
             <div className="relative">
@@ -341,17 +341,17 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
                 value={formData.max_salary_budget || ''}
                 onChange={(e) => setFormData({ ...formData, max_salary_budget: e.target.value })}
                 placeholder="e.g. 3500000"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
               />
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
               Internal recruiter reference only. Not visible on public candidate postings.
             </p>
           </div>
 
           {/* Hiring Complete By */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
               Hiring Shall Be Completed By
             </label>
             <div className="relative">
@@ -362,10 +362,10 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
                 onChange={(e) =>
                   setFormData({ ...formData, hiring_complete_by: e.target.value })
                 }
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
               />
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
               Target close date for talent acquisition metrics.
             </p>
           </div>
@@ -373,15 +373,15 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
       </div>
 
       {/* Description Section */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-4">
+        <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-blue-600" />
-            <h2 className="text-lg font-bold text-slate-900">
+            <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
               Job Description <span className="text-red-500">*</span>
             </h2>
           </div>
-          <span className="text-xs text-slate-500">HTML Sanitized on Save</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">HTML Sanitized on Save</span>
         </div>
 
         <RichTextEditor
@@ -389,15 +389,15 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
           onChange={(html) => setFormData({ ...formData, description_html: html })}
         />
         {errors.description_html && (
-          <p className="text-xs text-red-600 mt-1">{errors.description_html}</p>
+          <p className="text-xs text-red-600 dark:text-red-400 mt-1">{errors.description_html}</p>
         )}
       </div>
 
       {/* Form Action Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200">
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-slate-800">
         <Link
           href="/admin/requisitions"
-          className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition inline-flex items-center gap-1.5"
+          className="px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition inline-flex items-center gap-1.5 active:scale-95"
         >
           <X className="h-4 w-4" />
           <span>Cancel</span>
@@ -408,9 +408,9 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
             type="button"
             disabled={isSubmitting}
             onClick={() => handleSubmit('draft')}
-            className="px-5 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-800 font-semibold text-sm hover:bg-slate-50 transition shadow-sm inline-flex items-center gap-2 disabled:opacity-50"
+            className="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm inline-flex items-center gap-2 disabled:opacity-50 active:scale-95"
           >
-            <Save className="h-4 w-4 text-slate-600" />
+            <Save className="h-4 w-4 text-slate-600 dark:text-slate-400" />
             <span>Save as Draft</span>
           </button>
 
@@ -418,7 +418,7 @@ export function RequisitionForm({ initialData, isEditing = false }: RequisitionF
             type="button"
             disabled={isSubmitting}
             onClick={() => handleSubmit('published')}
-            className="px-6 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition shadow-md inline-flex items-center gap-2 disabled:opacity-50"
+            className="px-6 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-sm hover:bg-blue-700 transition shadow-md shadow-blue-500/20 inline-flex items-center gap-2 disabled:opacity-50 active:scale-95"
           >
             <Send className="h-4 w-4" />
             <span>{isEditing ? 'Save & Publish' : 'Publish Requisition'}</span>
