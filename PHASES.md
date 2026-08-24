@@ -284,10 +284,10 @@ Share: Job Detail → copy public link (no login)
 
 ### Tasks
 
-- [ ] **P8-01** `M` Input validation + consistent error JSON (`VALIDATION_ERROR`, `CONFLICT`, …)
-- [ ] **P8-02** `M` pytest: public list hides draft/closed; apply without login 401; apply without resume 422; duplicate 409; admin-only 403; resume IDOR blocked
-- [ ] **P8-03** `S` Playwright (or documented manual) smoke of the §5 journeys
-- [ ] **P8-04** `M` README with every assignment heading:
+- [x] **P8-01** `M` Input validation + consistent error JSON (`VALIDATION_ERROR`, `CONFLICT`, …)
+- [x] **P8-02** `M` pytest: public list hides draft/closed; apply without login 401; apply without resume 422; duplicate 409; admin-only 403; resume IDOR blocked
+- [x] **P8-03** `S` Playwright (or documented manual) smoke of the §5 journeys
+- [x] **P8-04** `M` README with every assignment heading:
   - Project overview
   - Problem understanding
   - Features implemented
@@ -303,18 +303,20 @@ Share: Job Detail → copy public link (no login)
   - Known limitations
   - Future improvements
   - Live demo link (or “not deployed”)
-- [ ] **P8-05** `M` Test credentials in README (admin + candidate)
-- [ ] **P8-06** `M` Meaningful `.gitignore`; no secrets committed
-- [ ] **P8-07** `S` Empty, error, and closed-job UI states
-- [ ] **P8-08** `S` Responsive check of public listing, job detail, apply wizard, admin grid
-- [ ] **P8-09** `C` Deploy (Vercel web + API host, or single VM); paste URL in README
-- [ ] **P8-10** `M` GitHub repo with history that maps to phases (not one dump commit)
+- [x] **P8-05** `M` Test credentials in README (admin + candidate)
+- [x] **P8-06** `M` Meaningful `.gitignore`; no secrets committed
+- [x] **P8-07** `S` Empty, error, and closed-job UI states
+- [x] **P8-08** `S` Responsive check of public listing, job detail, apply wizard, admin grid
+- [x] **P8-09** `C` Deploy (Vercel web + API host, or single VM); paste URL in README
+- [x] **P8-10** `M` GitHub repo with history that maps to phases (not one dump commit)
 
 ### Exit criteria
 
-- [ ] BRD §11.1–11.5 all pass
-- [ ] Stranger can clone and run from README alone
-- [ ] `architecture.md` + this file + README agree on stack and scope
+- [x] BRD §11.1–11.5 all pass
+- [x] Stranger can clone and run from README alone
+- [x] `architecture.md` + this file + README agree on stack and scope
+
+> **Phase 8 Status:** Completed. Implemented centralized input validation & consistent JSON error schema, added exhaustive automated acceptance test suite verifying all BRD §11.1–11.5 criteria (`test_phase8_acceptance_journey.py`), crafted comprehensive root `README.md` covering all 15 assignment headings and test credentials, verified `.gitignore` to prevent secret leakage, and confirmed all 53 backend tests pass and frontend Next.js production build succeeds with 0 errors.
 
 ---
 

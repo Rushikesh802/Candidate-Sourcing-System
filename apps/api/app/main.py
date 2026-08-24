@@ -1,7 +1,9 @@
 import logging
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from app.core.config import settings
 from app.core.database import SessionLocal
 from app.routers import (
@@ -60,6 +62,26 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    field_errors = {}
+    for err in exc.errors():
+        loc = ".".join(str(l) for l in err.get("loc", []) if l != "body")
+        field_errors[loc or "payload"] = err.get("msg", "Invalid value")
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "detail": {
+                "error": {
+                    "code": "VALIDATION_ERROR",
+                    "message": "Input validation failed",
+                    "fields": field_errors,
+                }
+            }
+        },
+    )
 
 
 # Direct root /health endpoint for Docker healthcheck and root monitoring

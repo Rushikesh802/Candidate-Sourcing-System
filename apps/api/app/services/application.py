@@ -461,8 +461,8 @@ def _format_admin_application_list_item(app: Application) -> Dict[str, Any]:
 
     # Location & Total Exp
     location = prof_snapshot.get("current_location")
-    if not location and app.candidate and app.candidate.candidate_profile:
-        location = app.candidate.candidate_profile.current_location
+    if not location and app.candidate and getattr(app.candidate, "profile", None):
+        location = app.candidate.profile.current_location
 
     total_exp = snapshot.get("total_experience_years", 0.0)
     if not total_exp and prof_snapshot.get("total_experience_years") is not None:
@@ -566,8 +566,8 @@ def get_admin_application_detail(
     cand_mobile = cand_snapshot.get("mobile") or (app.candidate.mobile if app.candidate else None)
 
     location = prof_snapshot.get("current_location")
-    if not location and app.candidate and app.candidate.candidate_profile:
-        location = app.candidate.candidate_profile.current_location
+    if not location and app.candidate and getattr(app.candidate, "profile", None):
+        location = app.candidate.profile.current_location
 
     total_exp = snapshot.get("total_experience_years", 0.0)
     if not total_exp and prof_snapshot.get("total_experience_years") is not None:
