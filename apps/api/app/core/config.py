@@ -34,8 +34,9 @@ class Settings(BaseSettings):
     ADMIN_EMAIL: str = "admin@talentbridge.local"
     ADMIN_PASSWORD: str = "Admin@12345"
 
-    # URLs
+    # URLs & CORS
     PUBLIC_BASE_URL: str = "http://localhost:3000"
+    ALLOWED_ORIGINS: str = "*"
     NEXT_PUBLIC_API_BASE: Optional[str] = None
 
 
