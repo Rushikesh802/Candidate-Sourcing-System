@@ -45,4 +45,4 @@ databases:
   - name: candidate-sourcing-db
     plan: free
     databaseName: candidate_sourcing
-    user: postgres
+    user: candidate_user
