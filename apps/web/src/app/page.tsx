@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -50,7 +50,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-500 selection:text-white transition-colors duration-200">
       <Header />
 
       {/* Hero Viewport */}
@@ -121,17 +121,17 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-1">
               <Layers className="h-3.5 w-3.5" />
               <span>Explore Ecosystem</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Active Career Disciplines
             </h2>
           </div>
           <Link
             href="/jobs"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition"
           >
             <span>View all open requisitions</span>
             <ArrowRight className="h-4 w-4" />
@@ -145,20 +145,20 @@ export default function Home() {
               <Link
                 key={cat.title}
                 href={`/jobs?q=${encodeURIComponent(cat.q)}`}
-                className="group flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-blue-300 hover:shadow-md hover:-translate-y-0.5 transition-all"
+                className="group flex items-center justify-between p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800/90 shadow-sm hover:border-blue-300 dark:hover:border-blue-500/50 hover:shadow-md hover:-translate-y-0.5 transition-all"
               >
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <div className="h-12 w-12 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-100 dark:border-blue-800 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <Icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {cat.title}
                     </h3>
-                    <p className="text-xs text-slate-500 font-medium">{cat.count}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{cat.count}</p>
                   </div>
                 </div>
-                <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+                <ChevronRight className="h-4 w-4 text-slate-300 dark:text-slate-600 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
               </Link>
             );
           })}
@@ -166,33 +166,33 @@ export default function Home() {
       </section>
 
       {/* 3 Pillars Architecture */}
-      <section className="bg-slate-100/70 border-y border-slate-200/80 py-20 px-4 sm:px-6 lg:px-8">
+      <section className="bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800/80 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               A Purpose-Built Talent Infrastructure
             </h2>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-600 dark:text-slate-400">
               Designed with precision for seamless candidate applications and recruiter velocity.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Pillar 1 */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm flex flex-col justify-between">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-7 shadow-sm flex flex-col justify-between">
               <div>
-                <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 border border-blue-100">
+                <div className="h-12 w-12 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-5 border border-blue-100 dark:border-blue-800">
                   <Briefcase className="h-6 w-6" />
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">Verified Requisitions</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">Verified Requisitions</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                   Every position is directly linked to an internal requisition code, department headcount, and assigned hiring manager.
                 </p>
               </div>
-              <div className="pt-6 mt-6 border-t border-slate-100">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href="/jobs"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                 >
                   <span>Browse Jobs</span>
                   <ChevronRight className="h-3.5 w-3.5" />
@@ -201,20 +201,20 @@ export default function Home() {
             </div>
 
             {/* Pillar 2 */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm flex flex-col justify-between">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-7 shadow-sm flex flex-col justify-between">
               <div>
-                <div className="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5 border border-emerald-100">
+                <div className="h-12 w-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 border border-emerald-100 dark:border-emerald-800">
                   <CheckCircle2 className="h-6 w-6" />
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">4-Step Express Apply</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">4-Step Express Apply</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                   Build your candidate profile once (bio, education, experience) and apply to multiple positions with one-click snapshot generation.
                 </p>
               </div>
-              <div className="pt-6 mt-6 border-t border-slate-100">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href={user ? "/profile" : "/register"}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-800"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300"
                 >
                   <span>{user ? "Manage Profile" : "Create Account"}</span>
                   <ChevronRight className="h-3.5 w-3.5" />
@@ -223,20 +223,20 @@ export default function Home() {
             </div>
 
             {/* Pillar 3 */}
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm flex flex-col justify-between">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-7 shadow-sm flex flex-col justify-between">
               <div>
-                <div className="h-12 w-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5 border border-indigo-100">
+                <div className="h-12 w-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-5 border border-indigo-100 dark:border-indigo-800">
                   <Shield className="h-6 w-6" />
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">Recruiter Control Center</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">Recruiter Control Center</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                   Hiring managers can draft, publish, duplicate, evaluate applicants, and trigger real-time candidate notifications.
                 </p>
               </div>
-              <div className="pt-6 mt-6 border-t border-slate-100">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href={user?.role === 'admin' ? "/admin/requisitions" : "/login"}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-800"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300"
                 >
                   <span>{user?.role === 'admin' ? "Admin Portal" : "Recruiter Login"}</span>
                   <ChevronRight className="h-3.5 w-3.5" />
@@ -248,21 +248,21 @@ export default function Home() {
       </section>
 
       {/* Modern Footer */}
-      <footer className="mt-auto border-t border-slate-200 bg-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500">
+      <footer className="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-3">
             <div className="h-7 w-7 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
               <Briefcase className="h-4 w-4" />
             </div>
-            <span className="font-bold text-slate-800">TalentBridge</span>
+            <span className="font-bold text-slate-800 dark:text-slate-200">TalentBridge</span>
             <span>&copy; {new Date().getFullYear()} Candidate Sourcing Platform</span>
           </div>
 
           <div className="flex items-center gap-6 font-semibold">
-            <Link href="/jobs" className="hover:text-blue-600 transition">Careers Portal</Link>
-            <Link href="/login" className="hover:text-blue-600 transition">Candidate Sign In</Link>
-            <Link href="/register" className="hover:text-blue-600 transition">Register</Link>
-            <div className="flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
+            <Link href="/jobs" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Careers Portal</Link>
+            <Link href="/login" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Candidate Sign In</Link>
+            <Link href="/register" className="hover:text-blue-600 dark:hover:text-blue-400 transition">Register</Link>
+            <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-200/60 dark:border-emerald-800/60">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>All Systems Operational</span>
             </div>

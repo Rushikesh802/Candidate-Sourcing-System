@@ -187,7 +187,7 @@ export default function CandidateProfilePage() {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
         <Loader2 className="h-8 w-8 text-blue-600 animate-spin" />
-        <p className="text-xs font-semibold text-slate-500">Loading your candidate profile...</p>
+        <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">Loading your candidate profile...</p>
       </div>
     );
   }
@@ -195,7 +195,7 @@ export default function CandidateProfilePage() {
   if (error || !profileData) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="p-6 rounded-3xl bg-red-50 border border-red-200 text-red-700 flex items-start gap-4">
+        <div className="p-6 rounded-3xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 flex items-start gap-4">
           <AlertCircle className="h-6 w-6 shrink-0 mt-0.5" />
           <div>
             <h3 className="text-sm font-bold">Failed to Load Profile</h3>
@@ -213,12 +213,12 @@ export default function CandidateProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-10 selection:bg-blue-500 selection:text-white transition-colors duration-200">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Profile Identity Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-slate-800/90 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className="relative h-20 w-20 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-2 border-white shadow-md flex items-center justify-center font-black text-2xl shrink-0">
+            <div className="relative h-20 w-20 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-2 border-white dark:border-slate-800 shadow-md flex items-center justify-center font-black text-2xl shrink-0">
               {profileData.photo_url ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -232,22 +232,22 @@ export default function CandidateProfilePage() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
                   {profileData.first_name} {profileData.last_name}
                 </h1>
-                <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                   <CheckCircle className="h-3 w-3 text-emerald-500" /> Verified
                 </span>
               </div>
-              <p className="text-xs text-slate-500 font-medium mt-0.5">{profileData.email}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">{profileData.email}</p>
               
               <div className="flex items-center gap-2 mt-2">
                 {isFresher ? (
-                  <span className="text-xs font-bold text-blue-700 px-2.5 py-0.5 rounded-md bg-blue-50 border border-blue-200">
+                  <span className="text-xs font-bold text-blue-700 dark:text-blue-300 px-2.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800">
                     Fresher / Entry Level
                   </span>
                 ) : (
-                  <span className="text-xs font-bold text-slate-700 px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200">
+                  <span className="text-xs font-bold text-slate-700 dark:text-slate-300 px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                     {totalYears.toFixed(1)} yrs total experience
                   </span>
                 )}
@@ -255,22 +255,22 @@ export default function CandidateProfilePage() {
             </div>
           </div>
 
-          <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200/80 p-4 rounded-2xl max-w-xs shadow-inner space-y-1">
-            <span className="font-extrabold text-slate-900 block">⚡ Instant Profile Pre-fill</span>
-            <span className="text-slate-500 font-medium leading-relaxed block">
+          <div className="text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 p-4 rounded-2xl max-w-xs shadow-inner space-y-1">
+            <span className="font-extrabold text-slate-900 dark:text-white block">⚡ Instant Profile Pre-fill</span>
+            <span className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed block">
               Information saved here automatically pre-fills across all job applications.
             </span>
           </div>
         </div>
 
         {/* Tab Navigation Pill Bar */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-200/60 rounded-2xl overflow-x-auto border border-slate-200">
+        <div className="flex items-center gap-1.5 p-1 bg-slate-200/60 dark:bg-slate-800/80 rounded-2xl overflow-x-auto border border-slate-200 dark:border-slate-700">
           <button
             onClick={() => setActiveTab('bio')}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap ${
               activeTab === 'bio'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-700/50'
             }`}
           >
             <User className="h-4 w-4" />
@@ -281,14 +281,14 @@ export default function CandidateProfilePage() {
             onClick={() => setActiveTab('education')}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap ${
               activeTab === 'education'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-700/50'
             }`}
           >
             <GraduationCap className="h-4 w-4" />
             <span>2. Education</span>
             {educations.length > 0 && (
-              <span className="ml-1 text-[10px] px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full font-bold">
+              <span className="ml-1 text-[10px] px-2 py-0.5 bg-blue-50 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 rounded-full font-bold">
                 {educations.length}
               </span>
             )}
@@ -298,14 +298,14 @@ export default function CandidateProfilePage() {
             onClick={() => setActiveTab('experience')}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap ${
               activeTab === 'experience'
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-700/50'
             }`}
           >
             <Briefcase className="h-4 w-4" />
             <span>3. Work Experience</span>
             {!isFresher && experiences.length > 0 && (
-              <span className="ml-1 text-[10px] px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full font-bold">
+              <span className="ml-1 text-[10px] px-2 py-0.5 bg-blue-50 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 rounded-full font-bold">
                 {experiences.length}
               </span>
             )}
@@ -313,7 +313,7 @@ export default function CandidateProfilePage() {
         </div>
 
         {/* Tab Content Panel */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-slate-800/90 shadow-sm">
           {activeTab === 'bio' && (
             <BioForm
               initialData={profileData}

@@ -110,18 +110,18 @@ export default function JobDetailPage() {
   // 404 / Not Found Screen
   if (!isLoading && (isNotFound || !job)) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
         <Header />
         <main className="flex-1 flex items-center justify-center p-6">
-          <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 p-8 text-center shadow-lg space-y-5">
-            <div className="h-16 w-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-100 shadow-inner">
+          <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 text-center shadow-lg space-y-5">
+            <div className="h-16 w-16 rounded-2xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto border border-amber-100 dark:border-amber-800 shadow-inner">
               <AlertTriangle className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-900">
+              <h1 className="text-xl font-bold text-slate-900 dark:text-white">
                 Position Unavailable or Expired
               </h1>
-              <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 The role you requested may have been fulfilled, expired, or removed.
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function JobDetailPage() {
 
   if (isLoading || !job) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-50">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
         <Header />
         <JobDetailSkeleton />
       </div>
@@ -155,15 +155,15 @@ export default function JobDetailPage() {
   const isRemote = job.location?.toLowerCase().includes('remote');
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-500 selection:text-white transition-colors duration-200">
       <Header />
 
       {/* Top Breadcrumb Header Bar */}
-      <div className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-16 z-30">
+      <div className="bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-16 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
           <Link
             href="/jobs"
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-blue-600 transition"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition"
           >
             <ArrowLeft className="h-4 w-4" />
             <span>Back to All Openings</span>
@@ -172,17 +172,17 @@ export default function JobDetailPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-blue-600 hover:bg-blue-50 px-3.5 py-1.5 rounded-xl border border-slate-200 transition active:scale-95"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 transition active:scale-95"
               title="Share this position"
             >
               {copied ? (
                 <>
-                  <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  <span className="text-emerald-600">Link Copied</span>
+                  <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span className="text-emerald-600 dark:text-emerald-400">Link Copied</span>
                 </>
               ) : (
                 <>
-                  <Share2 className="h-3.5 w-3.5 text-slate-500" />
+                  <Share2 className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
                   <span>Share Position</span>
                 </>
               )}
@@ -197,28 +197,28 @@ export default function JobDetailPage() {
           {/* Main Column: Header & Detailed Description (2/3 width) */}
           <div className="lg:col-span-2 space-y-6">
             {/* Main Job Title Card */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-5">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800/90 p-6 sm:p-8 shadow-sm space-y-5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
-                  <Building2 className="h-3 w-3 text-blue-500" />
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800">
+                  <Building2 className="h-3 w-3 text-blue-500 dark:text-blue-400" />
                   {job.department}
                 </span>
                 {isRemote && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
-                    <Sparkles className="h-3 w-3 text-emerald-500" />
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800">
+                    <Sparkles className="h-3 w-3 text-emerald-500 dark:text-emerald-400" />
                     Remote Eligible
                   </span>
                 )}
-                <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                   {job.requisition_code}
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
                 {job.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-semibold text-slate-600 border-t border-slate-100 pt-4">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-semibold text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-800 pt-4">
                 <div className="flex items-center gap-1.5">
                   <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
                   <span>{job.location}</span>
@@ -231,7 +231,7 @@ export default function JobDetailPage() {
                   <Briefcase className="h-4 w-4 text-slate-400 shrink-0" />
                   <span>{job.experience_range}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-slate-400 ml-auto">
+                <div className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500 ml-auto">
                   <Calendar className="h-3.5 w-3.5" />
                   <span>Posted {formatRelativeDate(job.posted_at || job.created_at)}</span>
                 </div>
@@ -239,15 +239,15 @@ export default function JobDetailPage() {
             </div>
 
             {/* Rich Sanitized Description Container */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 shadow-sm space-y-4">
-              <h2 className="text-base font-extrabold text-slate-900 uppercase tracking-wider pb-3 border-b border-slate-100 flex items-center gap-2">
-                <Compass className="h-4 w-4 text-blue-600" />
-                <span>Role Overview & Specifications</span>
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800/90 p-6 sm:p-8 shadow-sm space-y-4">
+              <h2 className="text-base font-extrabold text-slate-900 dark:text-white uppercase tracking-wider pb-3 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
+                <Compass className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                <span>Role Overview &amp; Specifications</span>
               </h2>
 
               {job.description_html ? (
                 <div
-                  className="job-description prose prose-slate max-w-none text-slate-700 text-sm leading-relaxed space-y-4 font-normal"
+                  className="job-description prose prose-slate dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 text-sm leading-relaxed space-y-4 font-normal"
                   dangerouslySetInnerHTML={{ __html: job.description_html }}
                 />
               ) : (
@@ -278,56 +278,56 @@ export default function JobDetailPage() {
           {/* Sidebar Rail (1/3 width, sticky) */}
           <div className="lg:col-span-1 space-y-6 lg:sticky lg:top-32">
             {/* Overview Card */}
-            <div className="bg-white rounded-3xl border border-slate-200/90 p-6 shadow-sm space-y-6">
-              <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-900 pb-3 border-b border-slate-100">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800/90 p-6 shadow-sm space-y-6">
+              <h2 className="text-sm font-extrabold uppercase tracking-wider text-slate-900 dark:text-white pb-3 border-b border-slate-100 dark:border-slate-800">
                 Position Snapshot
               </h2>
 
               <div className="space-y-4 text-xs font-medium">
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-slate-500">Department</span>
-                  <span className="font-bold text-slate-900 text-right">{job.department}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Department</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-right">{job.department}</span>
                 </div>
 
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-slate-500">Location</span>
-                  <span className="font-bold text-slate-900 text-right">{job.location}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Location</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-right">{job.location}</span>
                 </div>
 
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-slate-500">Employment Type</span>
-                  <span className="font-bold text-slate-900 text-right">
+                  <span className="text-slate-500 dark:text-slate-400">Employment Type</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-right">
                     {formatEmploymentType(job.employment_type)}
                   </span>
                 </div>
 
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-slate-500">Experience Target</span>
-                  <span className="font-bold text-slate-900 text-right">{job.experience_range}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Experience Target</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-right">{job.experience_range}</span>
                 </div>
 
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-slate-500">Open Headcount</span>
-                  <span className="font-bold text-slate-900 text-right">{job.openings}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Open Headcount</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-right">{job.openings}</span>
                 </div>
 
                 {job.hiring_manager && (
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-slate-500">Hiring Lead</span>
-                    <span className="font-bold text-slate-900 text-right">{job.hiring_manager}</span>
+                    <span className="text-slate-500 dark:text-slate-400">Hiring Lead</span>
+                    <span className="font-bold text-slate-900 dark:text-white text-right">{job.hiring_manager}</span>
                   </div>
                 )}
 
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-slate-500">Date Posted</span>
-                  <span className="font-bold text-slate-900 text-right">
+                  <span className="text-slate-500 dark:text-slate-400">Date Posted</span>
+                  <span className="font-bold text-slate-900 dark:text-white text-right">
                     {formatDate(job.posted_at || job.created_at)}
                   </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-2.5 pt-3 border-t border-slate-100">
+              <div className="space-y-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <Link
                   href={applyUrl}
                   className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs shadow-md shadow-blue-500/20 transition flex items-center justify-center gap-2 text-center active:scale-95"
@@ -339,16 +339,16 @@ export default function JobDetailPage() {
                 <button
                   type="button"
                   onClick={handleShare}
-                  className="w-full py-2.5 px-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs transition flex items-center justify-center gap-2 active:scale-95"
+                  className="w-full py-2.5 px-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs transition flex items-center justify-center gap-2 active:scale-95"
                 >
                   {copied ? (
                     <>
-                      <Check className="h-4 w-4 text-emerald-600" />
-                      <span className="text-emerald-600">Link Copied!</span>
+                      <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-emerald-600 dark:text-emerald-400">Link Copied!</span>
                     </>
                   ) : (
                     <>
-                      <Share2 className="h-3.5 w-3.5 text-slate-500" />
+                      <Share2 className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
                       <span>Share Position</span>
                     </>
                   )}
@@ -357,11 +357,11 @@ export default function JobDetailPage() {
             </div>
 
             {/* Platform Guarantee Badge */}
-            <div className="bg-slate-100/90 rounded-3xl p-5 border border-slate-200/80 text-xs text-slate-600 flex items-start gap-3.5 shadow-inner">
-              <ShieldCheck className="h-6 w-6 text-blue-600 shrink-0 mt-0.5" />
+            <div className="bg-slate-100/90 dark:bg-slate-900/90 rounded-3xl p-5 border border-slate-200/80 dark:border-slate-800/80 text-xs text-slate-600 dark:text-slate-300 flex items-start gap-3.5 shadow-inner">
+              <ShieldCheck className="h-6 w-6 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
               <div>
-                <span className="font-extrabold text-slate-900 block mb-0.5">Verified Internal Requisition</span>
-                <span className="text-slate-500 leading-relaxed font-medium">
+                <span className="font-extrabold text-slate-900 dark:text-white block mb-0.5">Verified Internal Requisition</span>
+                <span className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
                   Applications are routed directly to the hiring manager and recruitment team with zero third-party intermediaries.
                 </span>
               </div>
@@ -371,7 +371,7 @@ export default function JobDetailPage() {
       </main>
 
       {/* Modern Footer */}
-      <footer className="border-t border-slate-200 bg-white py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500 dark:text-slate-400">
         <p>&copy; {new Date().getFullYear()} TalentBridge Inc. Candidate Sourcing System. All rights reserved.</p>
       </footer>
     </div>

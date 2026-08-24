@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -155,7 +155,7 @@ function JobListingsContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-500 selection:text-white transition-colors duration-200">
       <Header />
 
       {/* Hero Banner with Ambient Radial Mesh */}
@@ -198,14 +198,14 @@ function JobListingsContent() {
 
         {/* Error Notification */}
         {error && (
-          <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-800 flex items-center justify-between gap-3 text-xs font-semibold">
+          <div className="p-4 rounded-2xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200 flex items-center justify-between gap-3 text-xs font-semibold">
             <div className="flex items-center gap-2.5">
               <AlertCircle className="h-4 w-4 text-red-500 shrink-0" />
               <span>{error}</span>
             </div>
             <button
               onClick={() => window.location.reload()}
-              className="inline-flex items-center gap-1 text-red-700 hover:text-red-900 font-bold underline"
+              className="inline-flex items-center gap-1 text-red-700 dark:text-red-300 hover:underline font-bold"
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>Retry</span>
@@ -228,14 +228,14 @@ function JobListingsContent() {
           </div>
         ) : (
           /* Empty State */
-          <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center max-w-md mx-auto my-12 shadow-sm space-y-4">
-            <div className="h-16 w-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto border border-blue-100 shadow-inner">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-12 text-center max-w-md mx-auto my-12 shadow-sm space-y-4">
+            <div className="h-16 w-16 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto border border-blue-100 dark:border-blue-800 shadow-inner">
               <Briefcase className="h-8 w-8" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
               No matching positions found
             </h3>
-            <p className="text-xs text-slate-500 font-medium leading-relaxed">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
               {search || department || location || experience
                 ? "No open requisitions matched your selected filters. Try broadening your keywords or resetting filters."
                 : 'There are currently no published positions available. Check back soon for new openings!'}
@@ -253,7 +253,7 @@ function JobListingsContent() {
       </main>
 
       {/* Modern Footer */}
-      <footer className="mt-auto border-t border-slate-200 bg-white py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+      <footer className="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500 dark:text-slate-400">
         <p>&copy; {new Date().getFullYear()} TalentBridge Inc. Candidate Sourcing System. All rights reserved.</p>
       </footer>
     </div>
@@ -264,7 +264,7 @@ export default function PublicJobsPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex flex-col bg-slate-50">
+        <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
           <Header />
           <div className="flex-1 flex items-center justify-center p-12">
             <div className="h-8 w-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />

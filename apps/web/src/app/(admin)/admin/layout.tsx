@@ -16,6 +16,7 @@ import {
   ChevronRight,
   Sparkles,
 } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { user, logout, isLoading } = useAuth();
@@ -36,7 +37,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 text-slate-900 selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-500 selection:text-white transition-colors duration-200">
       {/* Admin Top Navigation Bar */}
       <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-xl text-white border-b border-slate-800 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -85,8 +86,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </nav>
           </div>
 
-          {/* Right: Public Site Link + User Details + Logout */}
-          <div className="flex items-center gap-4">
+          {/* Right: Theme Toggle + Public Site Link + User Details + Logout */}
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+
             <Link
               href="/jobs"
               target="_blank"
@@ -131,12 +134,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </div>
 
       {/* Admin Footer */}
-      <footer className="border-t border-slate-200 bg-white py-4 px-4 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-4 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <span className="font-medium text-slate-600">TalentBridge Internal Recruitment Console &middot; v2.0 Modern OS</span>
+          <span className="font-medium text-slate-600 dark:text-slate-400">TalentBridge Internal Recruitment Console &middot; v2.0 Modern OS</span>
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-slate-400 font-mono text-[11px]">System Live</span>
+            <span className="text-slate-400 dark:text-slate-500 font-mono text-[11px]">System Live</span>
           </div>
         </div>
       </footer>

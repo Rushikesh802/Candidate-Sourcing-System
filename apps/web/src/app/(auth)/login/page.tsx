@@ -30,29 +30,29 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-md bg-white p-8 sm:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200/90 relative overflow-hidden">
+    <div className="w-full max-w-md bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200/90 dark:border-slate-800 relative overflow-hidden">
       {/* Top subtle gradient accent line */}
       <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600" />
 
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-[11px] font-bold uppercase tracking-wider mb-3">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-[11px] font-bold uppercase tracking-wider mb-3">
           <ShieldCheck className="h-3.5 w-3.5" />
           <span>TalentBridge Security</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900">Welcome Back</h1>
-        <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
+        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">Welcome Back</h1>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">
           Sign in to your candidate or recruiter account
         </p>
       </div>
 
       {nextUrl && (
-        <div className="mb-6 p-3.5 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-800 flex items-center gap-2 font-medium">
+        <div className="mb-6 p-3.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-xs text-blue-800 dark:text-blue-300 flex items-center gap-2 font-medium">
           <span className="font-bold">Notice:</span> Sign in to continue to your application.
         </div>
       )}
 
       {error && (
-        <div className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-xs text-red-700 font-semibold flex items-start gap-2.5">
+        <div className="mb-6 p-4 rounded-2xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs text-red-700 dark:text-red-300 font-semibold flex items-start gap-2.5">
           <AlertCircle className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
           <span>{error}</span>
         </div>
@@ -60,7 +60,7 @@ function LoginForm() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+          <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
             Email Address *
           </label>
           <div className="relative">
@@ -71,19 +71,19 @@ function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="name@example.com"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-xs font-medium text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800 text-xs font-medium text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             />
           </div>
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider">
+            <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
               Password *
             </label>
             <Link
               href="/forgot-password"
-              className="text-[11px] text-blue-600 hover:text-blue-700 font-bold transition"
+              className="text-[11px] text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-bold transition"
             >
               Forgot password?
             </Link>
@@ -96,7 +96,7 @@ function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-xs font-medium text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800 text-xs font-medium text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition"
             />
           </div>
         </div>
@@ -121,10 +121,10 @@ function LoginForm() {
       <div className="mt-8">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-200" />
+            <div className="w-full border-t border-slate-200 dark:border-slate-800" />
           </div>
           <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-wider">
-            <span className="bg-white px-3 text-slate-400">Or continue with</span>
+            <span className="bg-white dark:bg-slate-900 px-3 text-slate-400 dark:text-slate-500">Or continue with</span>
           </div>
         </div>
 
@@ -133,7 +133,7 @@ function LoginForm() {
             type="button"
             disabled
             title="Google OAuth is coming soon"
-            className="w-full inline-flex justify-center items-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-400 cursor-not-allowed opacity-75"
+            className="w-full inline-flex justify-center items-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-bold text-slate-400 cursor-not-allowed opacity-75"
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24">
               <path
@@ -160,7 +160,7 @@ function LoginForm() {
             type="button"
             disabled
             title="LinkedIn OAuth is coming soon"
-            className="w-full inline-flex justify-center items-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-400 cursor-not-allowed opacity-75"
+            className="w-full inline-flex justify-center items-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-bold text-slate-400 cursor-not-allowed opacity-75"
           >
             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.66 1.66 0 0 0-1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66c0-.92-.74-1.66-1.66-1.66Z" />
@@ -170,11 +170,11 @@ function LoginForm() {
         </div>
       </div>
 
-      <div className="mt-8 text-center text-xs text-slate-500 font-medium">
+      <div className="mt-8 text-center text-xs text-slate-500 dark:text-slate-400 font-medium">
         Don&apos;t have an account?{' '}
         <Link
           href={nextUrl ? `/register?next=${encodeURIComponent(nextUrl)}` : '/register'}
-          className="text-blue-600 font-bold hover:underline"
+          className="text-blue-600 dark:text-blue-400 font-bold hover:underline"
         >
           Create candidate account
         </Link>
@@ -185,11 +185,11 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 selection:bg-blue-500 selection:text-white transition-colors duration-200">
       <Header />
       <main className="flex-1 flex items-center justify-center p-4 sm:p-8 relative">
         <div className="absolute inset-0 bg-dots-pattern opacity-40 pointer-events-none" />
-        <Suspense fallback={<div className="p-8 bg-white rounded-2xl shadow-sm">Loading...</div>}>
+        <Suspense fallback={<div className="p-8 bg-white dark:bg-slate-900 rounded-2xl shadow-sm">Loading...</div>}>
           <LoginForm />
         </Suspense>
       </main>
