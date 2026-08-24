@@ -4,12 +4,16 @@ from app.core.config import settings
 
 # Normalize DATABASE_URL for SQLAlchemy if needed
 db_url = settings.DATABASE_URL
+connect_args = {}
 if db_url.startswith("postgresql://"):
     db_url = db_url.replace("postgresql://", "postgresql+psycopg2://", 1)
+elif db_url.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
 
 engine = create_engine(
     db_url,
-    pool_pre_ping=True,
+    connect_args=connect_args,
+    pool_pre_ping=False if db_url.startswith("sqlite") else True,
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -24,6 +24,9 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     # Startup: Run bootstrap / seed if DB is available
     try:
+        import app.models  # noqa: F401
+        from app.core.database import Base, engine
+        Base.metadata.create_all(bind=engine)
         db = SessionLocal()
         try:
             init_db(db)
