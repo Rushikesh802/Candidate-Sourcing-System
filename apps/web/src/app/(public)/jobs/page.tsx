@@ -8,7 +8,7 @@ import { JobFilters } from '@/components/JobFilters';
 import { JobCardSkeleton } from '@/components/JobSkeleton';
 import { Job } from '@/types/job';
 import { fetchApi } from '@/lib/api';
-import { Briefcase, Sparkles, AlertCircle } from 'lucide-react';
+import { Briefcase, Sparkles, AlertCircle, RefreshCw, Compass } from 'lucide-react';
 
 function JobListingsContent() {
   const searchParams = useSearchParams();
@@ -155,28 +155,31 @@ function JobListingsContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-500 selection:text-white">
       <Header />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-900 via-blue-950 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-blue-900/50">
-        <div className="max-w-5xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-xs font-semibold tracking-wide uppercase">
-            <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-            TalentBridge Careers Portal
+      {/* Hero Banner with Ambient Radial Mesh */}
+      <section className="relative overflow-hidden bg-slate-950 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div className="absolute inset-0 bg-mesh-dark opacity-90 pointer-events-none" />
+        <div className="absolute inset-0 bg-grid-dark opacity-20 pointer-events-none" />
+        
+        <div className="relative max-w-5xl mx-auto text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-xs font-bold tracking-wider uppercase backdrop-blur-md">
+            <Compass className="h-3.5 w-3.5 text-blue-400" />
+            <span>Open Career Opportunities</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            Find Your Next Opportunity at TalentBridge
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            Explore Open Requisitions
           </h1>
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal">
-            Join our mission to transform recruitment technology. Discover roles where your skills will make a measurable impact from day one.
+          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto font-medium">
+            Browse verified openings, review direct compensation & team requirements, and apply instantly with your reusable candidate profile.
           </p>
         </div>
       </section>
 
-      {/* Main Container */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-        {/* Filters Section */}
+      {/* Main Content Area */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
+        {/* Filters Dock */}
         <JobFilters
           search={search}
           onSearchChange={setSearch}
@@ -193,64 +196,65 @@ function JobListingsContent() {
           totalResults={filteredJobs.length}
         />
 
-        {/* Error Alert */}
+        {/* Error Notification */}
         {error && (
-          <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 flex items-center justify-between gap-3 text-sm">
-            <div className="flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-red-500 shrink-0" />
+          <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-800 flex items-center justify-between gap-3 text-xs font-semibold">
+            <div className="flex items-center gap-2.5">
+              <AlertCircle className="h-4 w-4 text-red-500 shrink-0" />
               <span>{error}</span>
             </div>
             <button
               onClick={() => window.location.reload()}
-              className="text-xs font-bold underline hover:no-underline"
+              className="inline-flex items-center gap-1 text-red-700 hover:text-red-900 font-bold underline"
             >
-              Retry
+              <RefreshCw className="h-3.5 w-3.5" />
+              <span>Retry</span>
             </button>
           </div>
         )}
 
-        {/* Job Listings Grid */}
+        {/* Job Cards Grid */}
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <JobCardSkeleton key={i} />
             ))}
           </div>
         ) : filteredJobs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredJobs.map((job) => (
               <JobCard key={job.id || job.slug} job={job} />
             ))}
           </div>
         ) : (
           /* Empty State */
-          <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center max-w-lg mx-auto my-8 shadow-sm">
-            <div className="h-14 w-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-4 border border-blue-100">
-              <Briefcase className="h-7 w-7" />
+          <div className="rounded-2xl border border-slate-200 bg-white p-12 text-center max-w-md mx-auto my-12 shadow-sm space-y-4">
+            <div className="h-16 w-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto border border-blue-100 shadow-inner">
+              <Briefcase className="h-8 w-8" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1">
+            <h3 className="text-lg font-bold text-slate-900">
               No matching positions found
             </h3>
-            <p className="text-sm text-slate-500 mb-6">
+            <p className="text-xs text-slate-500 font-medium leading-relaxed">
               {search || department || location || experience
-                ? "We couldn't find any open positions matching your search filters. Try adjusting your keywords or clearing filters."
-                : 'There are currently no published openings available. Please check back soon!'}
+                ? "No open requisitions matched your selected filters. Try broadening your keywords or resetting filters."
+                : 'There are currently no published positions available. Check back soon for new openings!'}
             </p>
             {(search || department || location || experience) && (
               <button
                 onClick={handleResetFilters}
-                className="px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition shadow-sm"
+                className="px-5 py-2.5 text-xs font-bold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition shadow-sm"
               >
-                Clear all filters
+                Reset all filters
               </button>
             )}
           </div>
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white py-8 px-4 text-center text-xs text-slate-500">
-        <p>&copy; {new Date().getFullYear()} TalentBridge Inc. All rights reserved. Equal Opportunity Employer.</p>
+      {/* Modern Footer */}
+      <footer className="mt-auto border-t border-slate-200 bg-white py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+        <p>&copy; {new Date().getFullYear()} TalentBridge Inc. Candidate Sourcing System. All rights reserved.</p>
       </footer>
     </div>
   );
@@ -262,8 +266,8 @@ export default function PublicJobsPage() {
       fallback={
         <div className="min-h-screen flex flex-col bg-slate-50">
           <Header />
-          <div className="flex-1 flex items-center justify-center p-8">
-            <div className="h-8 w-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="flex-1 flex items-center justify-center p-12">
+            <div className="h-8 w-8 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
           </div>
         </div>
       }

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
@@ -21,6 +21,10 @@ import {
   CheckCircle,
   Loader2,
   AlertCircle,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  UserCircle2,
 } from 'lucide-react';
 
 type ActiveTab = 'bio' | 'education' | 'experience';
@@ -183,7 +187,7 @@ export default function CandidateProfilePage() {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3">
         <Loader2 className="h-8 w-8 text-blue-600 animate-spin" />
-        <p className="text-sm font-medium text-slate-500">Loading your candidate profile...</p>
+        <p className="text-xs font-semibold text-slate-500">Loading your candidate profile...</p>
       </div>
     );
   }
@@ -191,14 +195,14 @@ export default function CandidateProfilePage() {
   if (error || !profileData) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="p-6 rounded-2xl bg-red-50 border border-red-200 text-red-700 flex items-start gap-4">
+        <div className="p-6 rounded-3xl bg-red-50 border border-red-200 text-red-700 flex items-start gap-4">
           <AlertCircle className="h-6 w-6 shrink-0 mt-0.5" />
           <div>
-            <h3 className="text-base font-semibold">Failed to Load Profile</h3>
-            <p className="text-sm mt-1">{error || 'Unable to retrieve your candidate profile.'}</p>
+            <h3 className="text-sm font-bold">Failed to Load Profile</h3>
+            <p className="text-xs mt-1">{error || 'Unable to retrieve your candidate profile.'}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-3 px-4 py-1.5 rounded-lg bg-red-600 text-white text-xs font-semibold hover:bg-red-700 transition"
+              className="mt-3 px-4 py-2 rounded-xl bg-red-600 text-white text-xs font-bold hover:bg-red-700 transition"
             >
               Retry
             </button>
@@ -209,12 +213,12 @@ export default function CandidateProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-10 selection:bg-blue-500 selection:text-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {/* Page Header */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-full overflow-hidden bg-blue-100 text-blue-700 border-2 border-blue-200 flex items-center justify-center font-bold text-xl shrink-0">
+        {/* Profile Identity Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="flex items-center gap-5">
+            <div className="relative h-20 w-20 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-600 text-white border-2 border-white shadow-md flex items-center justify-center font-black text-2xl shrink-0">
               {profileData.photo_url ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -223,63 +227,68 @@ export default function CandidateProfilePage() {
                   className="h-full w-full object-cover"
                 />
               ) : (
-                `${profileData.first_name[0] || ''}${profileData.last_name[0] || ''}`
+                `${profileData.first_name?.[0] || ''}${profileData.last_name?.[0] || ''}`
               )}
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">
-                {profileData.first_name} {profileData.last_name}
-              </h1>
-              <p className="text-sm text-slate-500">{profileData.email}</p>
-              <div className="flex items-center gap-2 mt-1.5">
-                <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  <CheckCircle className="h-3 w-3" /> Candidate Profile
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                  {profileData.first_name} {profileData.last_name}
+                </h1>
+                <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <CheckCircle className="h-3 w-3 text-emerald-500" /> Verified
                 </span>
+              </div>
+              <p className="text-xs text-slate-500 font-medium mt-0.5">{profileData.email}</p>
+              
+              <div className="flex items-center gap-2 mt-2">
                 {isFresher ? (
-                  <span className="text-xs text-blue-700 font-medium px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200">
-                    Fresher
+                  <span className="text-xs font-bold text-blue-700 px-2.5 py-0.5 rounded-md bg-blue-50 border border-blue-200">
+                    Fresher / Entry Level
                   </span>
                 ) : (
-                  <span className="text-xs text-slate-600 font-medium px-2 py-0.5 rounded-full bg-slate-100">
-                    {totalYears.toFixed(1)} yrs experience
+                  <span className="text-xs font-bold text-slate-700 px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-200">
+                    {totalYears.toFixed(1)} yrs total experience
                   </span>
                 )}
               </div>
             </div>
           </div>
 
-          <div className="text-xs text-slate-500 bg-slate-50 border border-slate-200 p-3 rounded-xl max-w-xs">
-            <span className="font-semibold text-slate-700">Reusable Profile:</span> Data saved here
-            will automatically pre-fill when you apply to any job opening.
+          <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200/80 p-4 rounded-2xl max-w-xs shadow-inner space-y-1">
+            <span className="font-extrabold text-slate-900 block">⚡ Instant Profile Pre-fill</span>
+            <span className="text-slate-500 font-medium leading-relaxed block">
+              Information saved here automatically pre-fills across all job applications.
+            </span>
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex border-b border-slate-200 gap-2 overflow-x-auto">
+        {/* Tab Navigation Pill Bar */}
+        <div className="flex items-center gap-1.5 p-1 bg-slate-200/60 rounded-2xl overflow-x-auto border border-slate-200">
           <button
             onClick={() => setActiveTab('bio')}
-            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap ${
               activeTab === 'bio'
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                ? 'bg-white text-blue-600 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
             }`}
           >
             <User className="h-4 w-4" />
-            1. Personal Bio & Contact
+            <span>1. Personal Bio &amp; Contact</span>
           </button>
 
           <button
             onClick={() => setActiveTab('education')}
-            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap ${
               activeTab === 'education'
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                ? 'bg-white text-blue-600 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
             }`}
           >
             <GraduationCap className="h-4 w-4" />
-            2. Education Qualifications
+            <span>2. Education</span>
             {educations.length > 0 && (
-              <span className="ml-1 text-[11px] px-1.5 py-0.2 bg-slate-100 text-slate-600 rounded-full font-bold">
+              <span className="ml-1 text-[10px] px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full font-bold">
                 {educations.length}
               </span>
             )}
@@ -287,24 +296,24 @@ export default function CandidateProfilePage() {
 
           <button
             onClick={() => setActiveTab('experience')}
-            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition whitespace-nowrap ${
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-extrabold transition-all whitespace-nowrap ${
               activeTab === 'experience'
-                ? 'border-blue-600 text-blue-600'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                ? 'bg-white text-blue-600 shadow-sm'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
             }`}
           >
             <Briefcase className="h-4 w-4" />
-            3. Work Experience
+            <span>3. Work Experience</span>
             {!isFresher && experiences.length > 0 && (
-              <span className="ml-1 text-[11px] px-1.5 py-0.2 bg-slate-100 text-slate-600 rounded-full font-bold">
+              <span className="ml-1 text-[10px] px-2 py-0.5 bg-blue-50 text-blue-700 rounded-full font-bold">
                 {experiences.length}
               </span>
             )}
           </button>
         </div>
 
-        {/* Tab Content Panels */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+        {/* Tab Content Panel */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm">
           {activeTab === 'bio' && (
             <BioForm
               initialData={profileData}

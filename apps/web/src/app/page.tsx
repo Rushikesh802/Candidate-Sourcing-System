@@ -14,6 +14,15 @@ import {
   Layers,
   ChevronRight,
   Shield,
+  Zap,
+  Code2,
+  Cpu,
+  BarChart3,
+  Users2,
+  CheckCircle2,
+  Building2,
+  Terminal,
+  Lock,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -31,132 +40,234 @@ export default function Home() {
     }
   };
 
-  const popularRoles = [
-    { label: 'Engineering', q: 'Engineering' },
-    { label: 'Product & Design', q: 'Product' },
-    { label: 'Remote Only', q: 'Remote' },
-    { label: 'Marketing', q: 'Marketing' },
-    { label: 'Operations', q: 'Operations' },
+  const categoryCards = [
+    { title: 'Engineering & Systems', count: '12 open roles', icon: Code2, q: 'Engineering' },
+    { title: 'AI & Data Science', count: '8 open roles', icon: Cpu, q: 'AI' },
+    { title: 'Product & Design', count: '6 open roles', icon: Sparkles, q: 'Product' },
+    { title: 'Sales & Growth', count: '5 open roles', icon: BarChart3, q: 'Sales' },
+    { title: 'People & Operations', count: '4 open roles', icon: Users2, q: 'Operations' },
+    { title: 'Remote Anywhere', count: '15+ open roles', icon: Zap, q: 'Remote' },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-500 selection:text-white">
       <Header />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-900 via-slate-900 to-slate-950 text-white pt-20 pb-24 px-4 sm:px-6 lg:px-8 border-b border-blue-900/40">
-        <div className="max-w-5xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 text-blue-300 text-xs font-semibold tracking-wide uppercase">
-            <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-            Empowering Next-Gen Talent & Organizations
+      {/* Hero Viewport */}
+      <section className="relative overflow-hidden bg-slate-950 text-white pt-24 pb-28 px-4 sm:px-6 lg:px-8 border-b border-slate-800/80">
+        {/* Ambient Radial Mesh Gradients */}
+        <div className="absolute inset-0 bg-mesh-dark opacity-90 pointer-events-none" />
+        <div className="absolute inset-0 bg-grid-dark opacity-30 pointer-events-none" />
+        
+        <div className="relative max-w-5xl mx-auto text-center space-y-8">
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/20 backdrop-blur-md text-blue-300 text-xs font-bold tracking-wide">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>TALENTBRIDGE • DIRECT CANDIDATE SOURCING OS</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
-            Connecting exceptional talent with world-class teams
+          {/* Core Thesis Headline */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-4xl mx-auto leading-[1.08]">
+            Direct sourcing for high-impact teams.{' '}
+            <span className="gradient-text-brand">Zero black-box recruiting.</span>
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
-            Discover verified career opportunities with direct hiring manager reviews, streamlined candidate profiles, and real-time application tracking.
+          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
+            Direct hiring manager reviews, standardized candidate profiles with instant application tracking, and verified company requisitions.
           </p>
 
-          {/* Quick Search Bar */}
-          <form onSubmit={handleSearch} className="max-w-2xl mx-auto pt-4">
-            <div className="flex flex-col sm:flex-row items-center gap-2.5 p-2 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl">
+          {/* Frosted Glass Search Dock */}
+          <form onSubmit={handleSearch} className="max-w-2xl mx-auto pt-2">
+            <div className="flex flex-col sm:flex-row items-center gap-2.5 p-2 bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-white/15 shadow-2xl shadow-blue-950/50">
               <div className="relative flex-1 w-full">
-                <Search className="absolute left-3.5 top-3.5 h-5 w-5 text-slate-400" />
+                <Search className="absolute left-4 top-3.5 h-5 w-5 text-slate-400 pointer-events-none" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Job title, department, or keyword..."
-                  className="w-full pl-11 pr-4 py-3 bg-white text-slate-900 placeholder-slate-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Job title, technical skill, or department..."
+                  className="w-full pl-12 pr-4 py-3.5 bg-white/10 text-white placeholder-slate-400 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 border border-white/10"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl transition shadow-lg shrink-0 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-blue-600/30 shrink-0 flex items-center justify-center gap-2 active:scale-95"
               >
-                <span>Search Jobs</span>
+                <span>Find Positions</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
           </form>
 
-          {/* Popular Categories */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs text-slate-400">
-            <span>Popular searches:</span>
-            {popularRoles.map((role) => (
+          {/* Quick Metrics Bar */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 max-w-2xl mx-auto text-left">
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div className="text-xl font-black text-white">100%</div>
+              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Direct Manager Review</div>
+            </div>
+            <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div className="text-xl font-black text-blue-400">4-Step</div>
+              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Reusable Candidate Profile</div>
+            </div>
+            <div className="col-span-2 sm:col-span-1 p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div className="text-xl font-black text-emerald-400">&lt; 48 hrs</div>
+              <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Average Status Feedback</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Job Categories */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">
+              <Layers className="h-3.5 w-3.5" />
+              <span>Explore Ecosystem</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Active Career Disciplines
+            </h2>
+          </div>
+          <Link
+            href="/jobs"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 transition"
+          >
+            <span>View all open requisitions</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {categoryCards.map((cat) => {
+            const Icon = cat.icon;
+            return (
               <Link
-                key={role.label}
-                href={`/jobs?q=${encodeURIComponent(role.q)}`}
-                className="px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition"
+                key={cat.title}
+                href={`/jobs?q=${encodeURIComponent(cat.q)}`}
+                className="group flex items-center justify-between p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-blue-300 hover:shadow-md hover:-translate-y-0.5 transition-all"
               >
-                {role.label}
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                      {cat.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-medium">{cat.count}</p>
+                  </div>
+                </div>
+                <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
               </Link>
-            ))}
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 3 Pillars Architecture */}
+      <section className="bg-slate-100/70 border-y border-slate-200/80 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              A Purpose-Built Talent Infrastructure
+            </h2>
+            <p className="text-sm text-slate-600">
+              Designed with precision for seamless candidate applications and recruiter velocity.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Pillar 1 */}
+            <div className="bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 border border-blue-100">
+                  <Briefcase className="h-6 w-6" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900 mb-2">Verified Requisitions</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Every position is directly linked to an internal requisition code, department headcount, and assigned hiring manager.
+                </p>
+              </div>
+              <div className="pt-6 mt-6 border-t border-slate-100">
+                <Link
+                  href="/jobs"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800"
+                >
+                  <span>Browse Jobs</span>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Pillar 2 */}
+            <div className="bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5 border border-emerald-100">
+                  <CheckCircle2 className="h-6 w-6" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900 mb-2">4-Step Express Apply</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Build your candidate profile once (bio, education, experience) and apply to multiple positions with one-click snapshot generation.
+                </p>
+              </div>
+              <div className="pt-6 mt-6 border-t border-slate-100">
+                <Link
+                  href={user ? "/profile" : "/register"}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-800"
+                >
+                  <span>{user ? "Manage Profile" : "Create Account"}</span>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Pillar 3 */}
+            <div className="bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5 border border-indigo-100">
+                  <Shield className="h-6 w-6" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900 mb-2">Recruiter Control Center</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Hiring managers can draft, publish, duplicate, evaluate applicants, and trigger real-time candidate notifications.
+                </p>
+              </div>
+              <div className="pt-6 mt-6 border-t border-slate-100">
+                <Link
+                  href={user?.role === 'admin' ? "/admin/requisitions" : "/login"}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-800"
+                >
+                  <span>{user?.role === 'admin' ? "Admin Portal" : "Recruiter Login"}</span>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Feature Highlights Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
-            <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 border border-blue-100">
-              <Briefcase className="h-6 w-6" />
+      {/* Modern Footer */}
+      <footer className="mt-auto border-t border-slate-200 bg-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500">
+          <div className="flex items-center gap-3">
+            <div className="h-7 w-7 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
+              <Briefcase className="h-4 w-4" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1.5">Direct Job Sourcing</h3>
-            <p className="text-xs text-slate-600 leading-relaxed mb-4">
-              Browse published positions published directly by verified internal hiring managers with no third-party spam.
-            </p>
-            <Link
-              href="/jobs"
-              className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800"
-            >
-              <span>Explore open positions</span>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </Link>
+            <span className="font-bold text-slate-800">TalentBridge</span>
+            <span>&copy; {new Date().getFullYear()} Candidate Sourcing Platform</span>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
-            <div className="h-12 w-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-100">
-              <Clock className="h-6 w-6" />
+          <div className="flex items-center gap-6 font-semibold">
+            <Link href="/jobs" className="hover:text-blue-600 transition">Careers Portal</Link>
+            <Link href="/login" className="hover:text-blue-600 transition">Candidate Sign In</Link>
+            <Link href="/register" className="hover:text-blue-600 transition">Register</Link>
+            <div className="flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/60">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>All Systems Operational</span>
             </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1.5">Streamlined 4-Step Apply</h3>
-            <p className="text-xs text-slate-600 leading-relaxed mb-4">
-              Reusable candidate profile saves bio, education, and experience for instant 1-click apply across positions.
-            </p>
-            <Link
-              href={user ? "/profile" : "/register"}
-              className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 hover:text-emerald-800"
-            >
-              <span>{user ? "View your profile" : "Create candidate account"}</span>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
-            <div className="h-12 w-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-4 border border-purple-100">
-              <Shield className="h-6 w-6" />
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 mb-1.5">Admin Management Console</h3>
-            <p className="text-xs text-slate-600 leading-relaxed mb-4">
-              Create, draft, publish, edit, duplicate, and monitor job requisitions with comprehensive applicant tracking.
-            </p>
-            <Link
-              href={user?.role === 'admin' ? "/admin/requisitions" : "/login"}
-              className="inline-flex items-center gap-1 text-xs font-bold text-purple-600 hover:text-purple-800"
-            >
-              <span>{user?.role === 'admin' ? "Open Admin Console" : "Recruiter Login"}</span>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </Link>
           </div>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="mt-auto border-t border-slate-200 bg-white py-8 px-4 text-center text-xs text-slate-500">
-        <p>&copy; {new Date().getFullYear()} TalentBridge Inc. Candidate Sourcing System. All rights reserved.</p>
       </footer>
     </div>
   );
